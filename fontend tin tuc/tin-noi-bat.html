@@ -1,0 +1,3769 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700%7CSource+Sans+Pro:400,600,400italic,700italic,700&amp;subset=vietnamese,latin" media="all">
+<link rel="stylesheet" id="boottrap-style-css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css?ver=1.1.7" type="text/css" media="all">
+
+<style>
+    .wp-pagenavi {
+        clear: both;
+    }
+    
+    .wp-pagenavi a,
+    .wp-pagenavi span {
+        text-decoration: none;
+        border: 1px solid #BFBFBF;
+        padding: 3px 5px;
+        margin: 2px;
+    }
+    
+    .wp-pagenavi a:hover,
+    .wp-pagenavi span.current {
+        border-color: #000;
+    }
+    
+    .wp-pagenavi span.current {
+        font-weight: bold;
+    }
+    
+    .fb_hidden {
+        position: absolute;
+        top: -10000px;
+        z-index: 10001
+    }
+    
+    .fb_reposition {
+        overflow: hidden;
+        position: relative
+    }
+    
+    .fb_invisible {
+        display: none
+    }
+    
+    .fb_reset {
+        background: none;
+        border: 0;
+        border-spacing: 0;
+        color: #000;
+        cursor: auto;
+        direction: ltr;
+        font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+        font-size: 11px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: normal;
+        letter-spacing: normal;
+        line-height: 1;
+        margin: 0;
+        overflow: visible;
+        padding: 0;
+        text-align: left;
+        text-decoration: none;
+        text-indent: 0;
+        text-shadow: none;
+        text-transform: none;
+        visibility: visible;
+        white-space: normal;
+        word-spacing: normal
+    }
+    
+    .fb_reset>div {
+        overflow: hidden
+    }
+    
+    @keyframes fb_transform {
+        from {
+            opacity: 0;
+            transform: scale(.95)
+        }
+        to {
+            opacity: 1;
+            transform: scale(1)
+        }
+    }
+    
+    .fb_animate {
+        animation: fb_transform .3s forwards
+    }
+    
+    .fb_dialog {
+        background: rgba(82, 82, 82, .7);
+        position: absolute;
+        top: -10000px;
+        z-index: 10001
+    }
+    
+    .fb_dialog_advanced {
+        border-radius: 8px;
+        padding: 10px
+    }
+    
+    .fb_dialog_content {
+        background: #fff;
+        color: #373737
+    }
+    
+    .fb_dialog_close_icon {
+        background: url(https://z-p3-static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;
+        cursor: pointer;
+        display: block;
+        height: 15px;
+        position: absolute;
+        right: 18px;
+        top: 17px;
+        width: 15px
+    }
+    
+    .fb_dialog_mobile .fb_dialog_close_icon {
+        left: 5px;
+        right: auto;
+        top: 5px
+    }
+    
+    .fb_dialog_padding {
+        background-color: transparent;
+        position: absolute;
+        width: 1px;
+        z-index: -1
+    }
+    
+    .fb_dialog_close_icon:hover {
+        background: url(https://z-p3-static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent
+    }
+    
+    .fb_dialog_close_icon:active {
+        background: url(https://z-p3-static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent
+    }
+    
+    .fb_dialog_iframe {
+        line-height: 0
+    }
+    
+    .fb_dialog_content .dialog_title {
+        background: #6d84b4;
+        border: 1px solid #365899;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        margin: 0
+    }
+    
+    .fb_dialog_content .dialog_title>span {
+        background: url(https://z-p3-static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;
+        float: left;
+        padding: 5px 0 7px 26px
+    }
+    
+    body.fb_hidden {
+        height: 100%;
+        left: 0;
+        margin: 0;
+        overflow: visible;
+        position: absolute;
+        top: -10000px;
+        transform: none;
+        width: 100%
+    }
+    
+    .fb_dialog.fb_dialog_mobile.loading {
+        background: url(https://z-p3-static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;
+        min-height: 100%;
+        min-width: 100%;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        z-index: 10001
+    }
+    
+    .fb_dialog.fb_dialog_mobile.loading.centered {
+        background: none;
+        height: auto;
+        min-height: initial;
+        min-width: initial;
+        width: auto
+    }
+    
+    .fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner {
+        width: 100%
+    }
+    
+    .fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content {
+        background: none
+    }
+    
+    .loading.centered #fb_dialog_loader_close {
+        clear: both;
+        color: #fff;
+        display: block;
+        font-size: 18px;
+        padding-top: 20px
+    }
+    
+    #fb-root #fb_dialog_ipad_overlay {
+        background: rgba(0, 0, 0, .4);
+        bottom: 0;
+        left: 0;
+        min-height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+        z-index: 10000
+    }
+    
+    #fb-root #fb_dialog_ipad_overlay.hidden {
+        display: none
+    }
+    
+    .fb_dialog.fb_dialog_mobile.loading iframe {
+        visibility: hidden
+    }
+    
+    .fb_dialog_mobile .fb_dialog_iframe {
+        position: sticky;
+        top: 0
+    }
+    
+    .fb_dialog_content .dialog_header {
+        background: linear-gradient(from(#738aba), to(#2c4987));
+        border-bottom: 1px solid;
+        border-color: #043b87;
+        box-shadow: white 0 1px 1px -1px inset;
+        color: #fff;
+        font: bold 14px Helvetica, sans-serif;
+        text-overflow: ellipsis;
+        text-shadow: rgba(0, 30, 84, .296875) 0 -1px 0;
+        vertical-align: middle;
+        white-space: nowrap
+    }
+    
+    .fb_dialog_content .dialog_header table {
+        height: 43px;
+        width: 100%
+    }
+    
+    .fb_dialog_content .dialog_header td.header_left {
+        font-size: 12px;
+        padding-left: 5px;
+        vertical-align: middle;
+        width: 60px
+    }
+    
+    .fb_dialog_content .dialog_header td.header_right {
+        font-size: 12px;
+        padding-right: 5px;
+        vertical-align: middle;
+        width: 60px
+    }
+    
+    .fb_dialog_content .touchable_button {
+        background: linear-gradient(from(#4267B2), to(#2a4887));
+        background-clip: padding-box;
+        border: 1px solid #29487d;
+        border-radius: 3px;
+        display: inline-block;
+        line-height: 18px;
+        margin-top: 3px;
+        max-width: 85px;
+        padding: 4px 12px;
+        position: relative
+    }
+    
+    .fb_dialog_content .dialog_header .touchable_button input {
+        background: none;
+        border: none;
+        color: #fff;
+        font: bold 12px Helvetica, sans-serif;
+        margin: 2px -12px;
+        padding: 2px 6px 3px 6px;
+        text-shadow: rgba(0, 30, 84, .296875) 0 -1px 0
+    }
+    
+    .fb_dialog_content .dialog_header .header_center {
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 18px;
+        text-align: center;
+        vertical-align: middle
+    }
+    
+    .fb_dialog_content .dialog_content {
+        background: url(https://z-p3-static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;
+        border: 1px solid #4a4a4a;
+        border-bottom: 0;
+        border-top: 0;
+        height: 150px
+    }
+    
+    .fb_dialog_content .dialog_footer {
+        background: #f5f6f7;
+        border: 1px solid #4a4a4a;
+        border-top-color: #ccc;
+        height: 40px
+    }
+    
+    #fb_dialog_loader_close {
+        float: left
+    }
+    
+    .fb_dialog.fb_dialog_mobile .fb_dialog_close_icon {
+        visibility: hidden
+    }
+    
+    #fb_dialog_loader_spinner {
+        animation: rotateSpinner 1.2s linear infinite;
+        background-color: transparent;
+        background-image: url(https://z-p3-static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        height: 24px;
+        width: 24px
+    }
+    
+    @keyframes rotateSpinner {
+        0% {
+            transform: rotate(0deg)
+        }
+        100% {
+            transform: rotate(360deg)
+        }
+    }
+    
+    .fb_iframe_widget {
+        display: inline-block;
+        position: relative
+    }
+    
+    .fb_iframe_widget span {
+        display: inline-block;
+        position: relative;
+        text-align: justify
+    }
+    
+    .fb_iframe_widget iframe {
+        position: absolute
+    }
+    
+    .fb_iframe_widget_fluid_desktop,
+    .fb_iframe_widget_fluid_desktop span,
+    .fb_iframe_widget_fluid_desktop iframe {
+        max-width: 100%
+    }
+    
+    .fb_iframe_widget_fluid_desktop iframe {
+        min-width: 220px;
+        position: relative
+    }
+    
+    .fb_iframe_widget_lift {
+        z-index: 1
+    }
+    
+    .fb_iframe_widget_fluid {
+        display: inline
+    }
+    
+    .fb_iframe_widget_fluid span {
+        width: 100%
+    }
+    
+    .fb_mpn_mobile_landing_page_slide_out {
+        animation-duration: 200ms;
+        animation-name: fb_mpn_landing_page_slide_out;
+        transition-timing-function: ease-in
+    }
+    
+    .fb_mpn_mobile_landing_page_slide_out_from_left {
+        animation-duration: 200ms;
+        animation-name: fb_mpn_landing_page_slide_out_from_left;
+        transition-timing-function: ease-in
+    }
+    
+    .fb_mpn_mobile_landing_page_slide_up {
+        animation-duration: 500ms;
+        animation-name: fb_mpn_landing_page_slide_up;
+        transition-timing-function: ease-in
+    }
+    
+    .fb_mpn_mobile_bounce_in {
+        animation-duration: 300ms;
+        animation-name: fb_mpn_bounce_in;
+        transition-timing-function: ease-in
+    }
+    
+    .fb_mpn_mobile_bounce_out {
+        animation-duration: 300ms;
+        animation-name: fb_mpn_bounce_out;
+        transition-timing-function: ease-in
+    }
+    
+    .fb_mpn_mobile_bounce_out_v2 {
+        animation-duration: 300ms;
+        animation-name: fb_mpn_fade_out;
+        transition-timing-function: ease-in
+    }
+    
+    .fb_customer_chat_bounce_in_v2 {
+        animation-duration: 300ms;
+        animation-name: fb_bounce_in_v2;
+        transition-timing-function: ease-in
+    }
+    
+    .fb_customer_chat_bounce_in_from_left {
+        animation-duration: 300ms;
+        animation-name: fb_bounce_in_from_left;
+        transition-timing-function: ease-in
+    }
+    
+    .fb_customer_chat_bounce_out_v2 {
+        animation-duration: 300ms;
+        animation-name: fb_bounce_out_v2;
+        transition-timing-function: ease-in
+    }
+    
+    .fb_customer_chat_bounce_out_from_left {
+        animation-duration: 300ms;
+        animation-name: fb_bounce_out_from_left;
+        transition-timing-function: ease-in
+    }
+    
+    .fb_invisible_flow {
+        display: inherit;
+        height: 0;
+        overflow-x: hidden;
+        width: 0
+    }
+    
+    @keyframes fb_mpn_landing_page_slide_out {
+        0% {
+            margin: 0 12px;
+            width: 100% - 24px
+        }
+        60% {
+            border-radius: 18px
+        }
+        100% {
+            border-radius: 50%;
+            margin: 0 24px;
+            width: 60px
+        }
+    }
+    
+    @keyframes fb_mpn_landing_page_slide_out_from_left {
+        0% {
+            left: 12px;
+            width: 100% - 24px
+        }
+        60% {
+            border-radius: 18px
+        }
+        100% {
+            border-radius: 50%;
+            left: 12px;
+            width: 60px
+        }
+    }
+    
+    @keyframes fb_mpn_landing_page_slide_up {
+        0% {
+            bottom: 0;
+            opacity: 0
+        }
+        100% {
+            bottom: 24px;
+            opacity: 1
+        }
+    }
+    
+    @keyframes fb_mpn_bounce_in {
+        0% {
+            opacity: .5;
+            top: 100%
+        }
+        100% {
+            opacity: 1;
+            top: 0
+        }
+    }
+    
+    @keyframes fb_mpn_fade_out {
+        0% {
+            bottom: 30px;
+            opacity: 1
+        }
+        100% {
+            bottom: 0;
+            opacity: 0
+        }
+    }
+    
+    @keyframes fb_mpn_bounce_out {
+        0% {
+            opacity: 1;
+            top: 0
+        }
+        100% {
+            opacity: .5;
+            top: 100%
+        }
+    }
+    
+    @keyframes fb_bounce_in_v2 {
+        0% {
+            opacity: 0;
+            transform: scale(0, 0);
+            transform-origin: bottom right
+        }
+        50% {
+            transform: scale(1.03, 1.03);
+            transform-origin: bottom right
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1, 1);
+            transform-origin: bottom right
+        }
+    }
+    
+    @keyframes fb_bounce_in_from_left {
+        0% {
+            opacity: 0;
+            transform: scale(0, 0);
+            transform-origin: bottom left
+        }
+        50% {
+            transform: scale(1.03, 1.03);
+            transform-origin: bottom left
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1, 1);
+            transform-origin: bottom left
+        }
+    }
+    
+    @keyframes fb_bounce_out_v2 {
+        0% {
+            opacity: 1;
+            transform: scale(1, 1);
+            transform-origin: bottom right
+        }
+        100% {
+            opacity: 0;
+            transform: scale(0, 0);
+            transform-origin: bottom right
+        }
+    }
+    
+    @keyframes fb_bounce_out_from_left {
+        0% {
+            opacity: 1;
+            transform: scale(1, 1);
+            transform-origin: bottom left
+        }
+        100% {
+            opacity: 0;
+            transform: scale(0, 0);
+            transform-origin: bottom left
+        }
+    }
+    
+    @keyframes slideInFromBottom {
+        0% {
+            opacity: .1;
+            transform: translateY(100%)
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    }
+    
+    @keyframes slideInFromBottomDelay {
+        0% {
+            opacity: 0;
+            transform: translateY(100%)
+        }
+        97% {
+            opacity: 0;
+            transform: translateY(100%)
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    }
+    
+    body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #333;
+        background-color: #fff;
+    }
+    
+    body {
+        margin: 0;
+    }
+    
+    * {
+        -webkit-text-size-adjust: none
+    }
+    
+    .youtubeVimeoWithPlaylistBorder {
+        position: relative;
+        overflow: hidden
+    }
+    
+    .youtubeVimeoWithPlaylist {
+        position: relative
+    }
+    
+    .youtubeVimeoWithPlaylist img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-width: none;
+        max-height: none
+    }
+    
+    .youtubeVimeoWithPlaylist_list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: none
+    }
+    
+    .youtubeVimeoWithPlaylist .stripe {
+        position: absolute;
+        display: block;
+        height: 100%;
+        z-index: 1;
+        overflow: hidden
+    }
+    
+    .youtubeVimeoWithPlaylist .block {
+        position: absolute;
+        display: block;
+        z-index: 1;
+        overflow: hidden
+    }
+    
+    .mycanvas {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        z-index: 4
+    }
+    
+    .youtubeVimeoWithPlaylist.default .bannerControls {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 2;
+        width: 100%
+    }
+    
+    .youtubeVimeoWithPlaylist.default .leftNav {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        margin-top: -35px;
+        width: 25px;
+        height: 50px;
+        background: url(//soikeotv.net/wp-content/themes/soikeotv/assets/css/skins/default/leftNavOFF.png) 0 0 no-repeat;
+        cursor: pointer
+    }
+    
+    .youtubeVimeoWithPlaylist.default .leftNav:hover {
+        background: url(//soikeotv.net/wp-content/themes/soikeotv/assets/css/skins/default/leftNavON.png) 0 0 no-repeat
+    }
+    
+    .youtubeVimeoWithPlaylist.default .rightNav {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        margin-top: -35px;
+        width: 25px;
+        height: 50px;
+        background: url(//soikeotv.net/wp-content/themes/soikeotv/assets/css/skins/default/rightNavOFF.png) 0 0 no-repeat;
+        cursor: pointer
+    }
+    
+    .youtubeVimeoWithPlaylist.default .rightNav:hover {
+        background: url(//soikeotv.net/wp-content/themes/soikeotv/assets/css/skins/default/rightNavON.png) 0 0 no-repeat
+    }
+    
+    .youtubeVimeoWithPlaylist.default .thumbsHolderWrapper {
+        position: absolute;
+        background: #000;
+        height: 100%;
+        overflow: hidden
+    }
+    
+    .youtubeVimeoWithPlaylist.default .thumbsHolderVisibleWrapper {
+        position: absolute;
+        height: 100%;
+        overflow: hidden
+    }
+    
+    .youtubeVimeoWithPlaylist.default .thumbsHolder {
+        position: absolute
+    }
+    
+    .youtubeVimeoWithPlaylist.default .thumbsHolder_ThumbOFF {
+        display: block;
+        text-align: left;
+        line-height: 1.4em;
+        cursor: pointer
+    }
+    
+    .youtubeVimeoWithPlaylist.default .thumbsHolder_ThumbOFF .title {
+        font-weight: 500;
+        display: inline-block;
+        padding-bottom: 5px;
+        width: calc(100% - 120px);
+        overflow: hidden
+    }
+    
+    .youtubeVimeoWithPlaylist.default .thumbsHolder_ThumbOFF .reg {
+        font-weight: 400;
+        overflow: hidden
+    }
+    
+    .youtubeVimeoWithPlaylist.default .thumbsHolder_ThumbOFF img {
+        position: relative;
+        float: left;
+        margin-right: 10px;
+        border-radius: 10px;
+        width: 90px;
+        height: 90px
+    }
+    
+    .youtubeVimeoWithPlaylist.default .slider-vertical {
+        display: none;
+        position: absolute;
+        width: 6px
+    }
+    
+    .youtubeVimeoWithPlaylist.default .slider-vertical.ui-slider {
+        position: relative
+    }
+    
+    .youtubeVimeoWithPlaylist.default .slider-vertical.ui-slider .ui-slider-handle {
+        position: absolute;
+        z-index: 2;
+        width: 6px;
+        height: 25px;
+        cursor: pointer;
+        background: url(//soikeotv.net/wp-content/themes/soikeotv/assets/css/skins/default/scrollerFaceOFF.png) 0 0 no-repeat
+    }
+    
+    .youtubeVimeoWithPlaylist.default .slider-vertical.ui-slider .ui-slider-handle:hover {
+        background: url(//soikeotv.net/wp-content/themes/soikeotv/assets/css/skins/default/scrollerFaceON.png) 0 0 no-repeat
+    }
+    
+    .youtubeVimeoWithPlaylist.default .slider-vertical.ui-slider .ui-slider-range {
+        position: absolute;
+        z-index: 1;
+        display: block;
+        border: 0
+    }
+    
+    .youtubeVimeoWithPlaylist.default .slider-vertical.ui-slider-vertical {
+        width: 6px;
+        height: 100px
+    }
+    
+    .youtubeVimeoWithPlaylist.default .slider-vertical.ui-slider-vertical .ui-slider-handle {
+        left: 0;
+        margin-left: 0;
+        margin-bottom: -25px;
+        border: 0
+    }
+    
+    .youtubeVimeoWithPlaylist.default .slider-vertical.ui-slider-vertical .ui-slider-range {
+        left: 0;
+        width: 100%
+    }
+    
+    .youtubeVimeoWithPlaylist.default .slider-vertical.ui-slider-vertical .ui-slider-range-min {
+        bottom: 0
+    }
+    
+    .youtubeVimeoWithPlaylist.default .slider-vertical.ui-slider-vertical .ui-slider-range-max {
+        top: 0
+    }
+    
+    .youtubeVimeoWithPlaylist.default .slider-vertical.ui-widget-content {
+        xbackground: #090909
+    }
+    
+    .youtubeVimeoWithPlaylist.default .slider-vertical .ui-widget-header {
+        xbackground: #00c
+    }
+    
+    .youtubeVimeoWithPlaylist.default .lbg_player {
+        z-index: -1;
+        position: absolute
+    }
+    
+    .youtubeVimeoWithPlaylist.default .lbg_vimeo_player {
+        z-index: -1;
+        position: absolute
+    }
+    
+    .textElement11 {
+        font-size: 22px;
+        line-height: 22px;
+        color: #000
+    }
+    
+    .textElement12 {
+        font-family: pt sans, Verdana, Helvetica, sans-serif;
+        font-size: 16px;
+        line-height: 16px;
+        color: #000000;
+    }
+    
+    .textElement31 {
+        background: #d61d1d;
+        font-family: pt sans, Verdana, Helvetica, sans-serif;
+        font-size: 18px;
+        line-height: 18px;
+        padding: 0 2px 2px;
+        text-transform: uppercase;
+        color: #fff
+    }
+    
+    .textElement32 {
+        background: #fff;
+        font-size: 18px;
+        line-height: 18px;
+        padding: 0 2px 2px;
+        color: #000
+    }
+    
+    .textElement33 {
+        background: #000;
+        font-size: 18px;
+        line-height: 18px;
+        padding: 0 2px 2px;
+        color: #fff
+    }
+    
+    .textElement41 {
+        background: url(//soikeotv.net/wp-content/themes/soikeotv/assets/css/skins/default/textBg_transparency.png);
+        font-size: 24px;
+        line-height: 24px;
+        padding: 2px 3px;
+        color: #fff
+    }
+    
+    .textElement41 a {
+        text-decoration: none;
+        color: #ff5c1c
+    }
+    
+    .textElement41 a:hover {
+        color: #fff
+    }
+    
+    .textElement42 {
+        background: #fff;
+        font-size: 18px;
+        line-height: 18px;
+        padding: 2px 3px;
+        color: red
+    }
+    
+    .textElement61 {
+        font-family: pt sans, Verdana, Helvetica, sans-serif;
+        font-size: 38px;
+        line-height: 38px;
+        text-transform: uppercase;
+        color: #fff
+    }
+    
+    .textElement62 {
+        font-family: pt sans, Verdana, Helvetica, sans-serif;
+        font-size: 20px;
+        line-height: 20px;
+        text-transform: uppercase;
+        color: #fff
+    }
+    
+    .textElement11_FullWidth {
+        font-family: pt sans, Verdana, Helvetica, sans-serif;
+        font-size: 32px;
+        line-height: 32px;
+        color: #000
+    }
+    
+    .textElement12_FullWidth {
+        font-family: pt sans, Verdana, Helvetica, sans-serif;
+        font-size: 26px;
+        line-height: 26px;
+        color: #000000;
+    }
+    
+    .textElement31_FullWidth {
+        background: #d61d1d;
+        font-family: pt sans, Verdana, Helvetica, sans-serif;
+        font-size: 28px;
+        line-height: 28px;
+        padding: 0 2px 2px;
+        text-transform: uppercase;
+        color: #fff
+    }
+    
+    .textElement32_FullWidth {
+        background: #fff;
+        font-family: pt sans, Verdana, Helvetica, sans-serif;
+        font-size: 28px;
+        line-height: 28px;
+        padding: 0 2px 2px;
+        color: #000
+    }
+    
+    .textElement33_FullWidth {
+        background: #000;
+        font-family: pt sans, Verdana, Helvetica, sans-serif;
+        font-size: 28px;
+        line-height: 28px;
+        padding: 0 2px 2px;
+        color: #fff
+    }
+    
+    .textElement41_FullWidth {
+        background: url(//soikeotv.net/wp-content/themes/soikeotv/assets/css/skins/default/textBg_transparency.png);
+        font-family: pt sans, Verdana, Helvetica, sans-serif;
+        font-size: 44px;
+        line-height: 44px;
+        padding: 2px 3px;
+        color: #fff
+    }
+    
+    .textElement41_FullWidth a {
+        text-decoration: none;
+        color: #ff5c1c
+    }
+    
+    .textElement41_FullWidth a:hover {
+        color: #fff
+    }
+    
+    .textElement42_FullWidth {
+        background: #fff;
+        font-family: pt sans, Verdana, Helvetica, sans-serif;
+        font-size: 38px;
+        line-height: 38px;
+        padding: 2px 3px;
+        color: red
+    }
+    
+    .textElement61_FullWidth {
+        font-family: pt sans, Verdana, Helvetica, sans-serif;
+        font-size: 48px;
+        line-height: 48px;
+        text-transform: uppercase;
+        color: #000
+    }
+    
+    .textElement62_FullWidth {
+        font-family: pt sans, Verdana, Helvetica, sans-serif;
+        font-size: 30px;
+        line-height: 30px;
+        text-transform: uppercase;
+        color: #000
+    }
+    
+    .youtubeVimeoWithPlaylist_texts {
+        position: absolute;
+        z-index: 3;
+        display: none;
+        width: 100%;
+        text-align: left
+    }
+    
+    .youtubeVimeoWithPlaylist_text_line {
+        position: absolute
+    }
+    
+    .hideElement {
+        display: none
+    }
+    
+    * {
+        margin: 0;
+        padding: 0
+    }
+    
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        color: #3f3f3f
+    }
+    
+    ul {
+        list-style: none;
+        margin-bottom: 0
+    }
+    
+    .top_menu {
+        float: left;
+        width: 100%;
+        background: url(//soikeotv.net/wp-content/themes/soikeotv/assets/images/bg_top_menu.png) no-repeat center;
+        background-size: cover
+    }
+    
+    .top_menu ul {
+        margin-bottom: 0;
+        float: right
+    }
+    
+    .top_menu ul li {
+        display: inline-block
+    }
+    
+    .top_menu ul li a {
+        float: left;
+        color: #fff;
+        padding: 5px;
+        font-style: italic;
+        font-size: 14px
+    }
+    
+    .top_menu ul li a span {
+        padding-left: 7px
+    }
+    
+    .top_menu ul li a:hover {
+        text-decoration: none
+    }
+    
+    .header {
+        margin-top: 10px;
+        float: left;
+        width: 100%
+    }
+    
+    .logo img {
+        max-width: 100%;
+        width: 70%
+    }
+    
+    .banner {
+        text-align: right;
+        padding-right: 0!important
+    }
+    
+    .main_menu {
+        float: left;
+        width: 100%;
+        margin-top: 5px
+    }
+    
+    .navbar {
+        border-bottom: 2px solid #283d5f
+    }
+    
+    .main_menu .container-fluid,
+    .main_menu .navbar-header {
+        padding-left: 0;
+        padding-right: 0
+    }
+    
+    .nav>li>a {
+        font-family: roboto condensed, sans-serif!important;
+        color: #1f3558!important;
+        font-size: 21px!important;
+        padding: 10px 30px!important
+    }
+    
+    .nav>li.active>a,
+    .nav>li>a:focus,
+    .nav>li>a:hover {
+        background: 0 0;
+        border-bottom: 2px solid #1d7200;
+        font-family: roboto condensed, sans-serif;
+        color: #1d7200
+    }
+    
+    .main_menu .navbar-collapse {
+        padding-left: 0;
+        padding-right: 0
+    }
+    
+    .heading_cate {
+        float: left;
+        width: 265px;
+        height: 40px;
+        background: url(//soikeotv.net/wp-content/themes/soikeotv/assets/images/bg_cat.png) no-repeat;
+        background-size: cover;
+        font-family: roboto condensed, sans-serif;
+        font-size: 18px;
+        color: #fff;
+        line-height: 40px;
+        padding-left: 55px;
+        position: relative;
+        text-transform: uppercase;
+        z-index: 11111;
+        margin-top: 5px
+    }
+    
+    .no-padding-left {
+        padding-left: 0
+    }
+    
+    .top img {
+        max-width: 100%;
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        height: auto
+    }
+    
+    .top .title_matchtop,
+    .top h3 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+        color: #000;
+        font-size: 25px;
+        margin-bottom: 10px;
+        margin-top: 10px
+    }
+    
+    .top h2 a,
+    .top h3 a {
+        color: #3f3f3f;
+        text-decoration: none
+    }
+    
+    .top h2 a:hover,
+    .top h3 a:hover {
+        color: #1d7200;
+        text-decoration: none
+    }
+    
+    .top p {
+        font-weight: 300;
+        text-align: justify;
+        float: left;
+        width: 100%;
+        font-size: 14px;
+        font-family: Arial, Helvetica, sans-serif
+    }
+    
+    .top_match hr {
+        float: left;
+        width: 100%;
+        border-top: 2px solid #282828;
+        margin-bottom: 2px;
+        margin-top: 5px;
+        margin-bottom: 10px
+    }
+    
+    .math_items img {
+        max-width: 100%;
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        height: 138px
+    }
+    
+    .math_items a,
+    .math_items a h3 {
+        float: left;
+        width: 100%;
+        font-size: 17px;
+        color: #3f3f3f
+    }
+    
+    .math_items a:hover {
+        color: #1d7200;
+        text-decoration: none
+    }
+    
+    .flex-container {
+        display: flex;
+        flex-wrap: nowrap;
+        background-color: #1e90ff
+    }
+    
+    .nhandinh {
+        float: left;
+        width: 100%
+    }
+    
+    .list_match_today {
+        float: left;
+        width: 100%
+    }
+    
+    .list_giai {
+        background: url(//soikeotv.net/wp-content/themes/soikeotv/assets/images/bg_giai.png) no-repeat center;
+        float: left;
+        width: 100%;
+        padding: 7px 10px 11px;
+        color: #fff;
+        font-size: 13px;
+        background-size: cover;
+        display: block;
+        text-align: center
+    }
+    
+    .match_info {
+        float: left;
+        width: 100%;
+        background: #fff;
+        border: 1px solid #d05252;
+        border-radius: 10px;
+        margin-top: -4px;
+        text-align: center
+    }
+    
+    .vs {
+        vertical-align: middle;
+        line-height: px;
+        margin-top: 20px
+    }
+    
+    .img_cn img,
+    .img_kk img {
+        max-width: 100px;
+        max-height: 75px;
+        width: 100px;
+        height: 75px;
+        margin-top: 10px;
+        margin-bottom: 10px
+    }
+    
+    .tile_cau {
+        text-align: center
+    }
+    
+    .match_info hr {
+        width: 90%;
+        border-top: 1px solid #939393;
+        margin: 0 auto;
+        margin-bottom: 10px
+    }
+    
+    .list_match_today {
+        color: #282828
+    }
+    
+    .tile_cau span {
+        float: right
+    }
+    
+    .match_info:hover {
+        color: #fff;
+        background: #617083
+    }
+    
+    .img_cn span,
+    .img_kk span {
+        font-weight: 700;
+        text-transform: uppercase;
+        height: 100px;
+        vertical-align: middle;
+        padding-top: 12%;
+        font-size: 14px
+    }
+    
+    .btn_readmore {
+        float: left;
+        width: 100%;
+        text-align: center;
+        background: #bebebe
+    }
+    
+    .no-padding-right {
+        padding-right: 0
+    }
+    
+    .content_news_right {
+        float: left;
+        width: 98%;
+        margin-left: 2%;
+        border-left: 1px solid #1e334e
+    }
+    
+    .content_news_right .fa-ul .fa-li {
+        left: -1em;
+        position: absolute;
+        text-align: center;
+        width: 2em;
+        line-height: inherit;
+        font-size: 23px;
+        top: 6px
+    }
+    
+    .content_news_right .fa-ul {
+        list-style-type: none;
+        margin-left: 1.5em;
+        padding-left: 0
+    }
+    
+    .hot_news_right {
+        float: left;
+        width: 100%;
+        background: url(//soikeotv.net/wp-content/themes/soikeotv/assets/images/bg_hot_right.png) no-repeat;
+        background-size: cover;
+        margin-top: -21px
+    }
+    
+    .time {
+        background: #5d6d7e;
+        color: #1e324f;
+        font-weight: 700;
+        font-size: 12px;
+        padding: 4px;
+        border-radius: 5px;
+        margin-top: 10px;
+        float: left
+    }
+    
+    .title_r_new span,
+    .title_r_new span h3 {
+        color: #1e324f;
+        font-weight: 700;
+        font-size: 15px
+    }
+    
+    .title_r_new span h3 {
+        margin-bottom: 0;
+        margin-top: 8px
+    }
+    
+    .info_r_news {
+        margin-top: 1px
+    }
+    
+    .content_news_right ul li a {
+        padding: 8px;
+        float: left;
+        width: 100%
+    }
+    
+    .content_news_right ul li {
+        border-bottom: 1px dashed #4a5c46;
+        float: left;
+        width: 100%
+    }
+    
+    .content_news_right ul li a:hover .info_r_news i,
+    .content_news_right ul li a:hover .time,
+    .content_news_right ul li a:hover .title_r_new span {
+        color: #fff
+    }
+    
+    .info_r_news i {
+        float: left;
+        margin-top: 4px;
+        margin-right: 5px
+    }
+    
+    .giaihot ul {
+        float: left;
+        width: 100%
+    }
+    
+    .giaihot,
+    .giaihot ul li {
+        float: left;
+        width: 100%;
+        margin-bottom: 6px
+    }
+    
+    .giaihot ul li:hover {
+        background-color: #1e4c4e;
+        -webkit-transition: background-color 1s linear;
+        -ms-transition: background-color 1s linear;
+        transition: background-color 1s linear;
+        opacity: .8
+    }
+    
+    .giaihot ul li:hover a {
+        color: #fec128
+    }
+    
+    .giaihot ul li {
+        float: left;
+        width: 100%;
+        margin-bottom: 6px;
+        height: 60px
+    }
+    
+    .giaihot ul li a {
+        color: #fff;
+        font-weight: 700;
+        position: relative
+    }
+    
+    .giaihot ul li a span {
+        position: absolute;
+        line-height: 60px;
+        vertical-align: middle;
+        padding-left: 10px;
+        font-size: 19px
+    }
+    
+    .giaihot ul li a img {
+        max-width: 100%;
+        width: 100%;
+        height: 100%
+    }
+    
+    .banner_ads {
+        float: left;
+        width: 100%
+    }
+    
+    .banner_ads a {
+        float: left;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px
+    }
+    
+    .list_post_bot ul {
+        float: left;
+        margin-top: 50px;
+        width: 100%
+    }
+    
+    .list_post_bot ul li {
+        border-bottom: 1px dashed #8b8989;
+        padding-bottom: 16px;
+        padding-top: 16px;
+        float: left;
+        width: 100%
+    }
+    
+    .list_post_bot ul li a {
+        font-size: 18px;
+        color: #282828
+    }
+    
+    .list_post_bot ul li a:hover {
+        color: #038f24;
+        text-decoration: underline
+    }
+    
+    .bot_content hr {
+        border-top: 2px solid #282828;
+        float: left;
+        width: 100%
+    }
+    
+    .slide_post {
+        float: left;
+        width: 100%
+    }
+    
+    .owl-nav {
+        position: absolute;
+        top: 32%;
+        float: left;
+        width: 100%
+    }
+    
+    .owl-prev {
+        float: right;
+        width: 50px;
+        height: 50px;
+        background: #48473fad
+    }
+    
+    .owl-next {
+        width: 50px;
+        height: 50px;
+        background: #48473fad;
+        float: left
+    }
+    
+    .slide_post .news_items a,
+    .slide_post .news_items h3 {
+        font-weight: 500;
+        font-size: 17px;
+        color: #000
+    }
+    
+    .category_des,
+    .home_content {
+        background: #fff;
+        border-radius: 10px;
+        padding: 15px;
+        height: 310px;
+        overflow-y: scroll;
+        font-family: roboto condensed, sans-serif;
+        font-size: 16px;
+        float: left;
+        width: 100%;
+        border: 1px solid #fd5200;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        -webkit-box-shadow: -2px 0 16px 0 #92e8b0;
+        -moz-box-shadow: -2px 0 16px 0 #92e8b0;
+        box-shadow: -2px 0 16px 0 #92e8b0
+    }
+    
+    .category_des img,
+    .home_content img {
+        max-width: 100%;
+        height: auto
+    }
+    
+    .category_des h2,
+    .category_des h3,
+    .category_des h4,
+    .category_des p,
+    .category_des ul,
+    .home_content h2,
+    .home_content h3,
+    .home_content h4,
+    .home_content p,
+    .home_content ul {
+        float: left;
+        width: 100%
+    }
+    
+    .category_des {
+        margin-top: 30px
+    }
+    
+    .about_home {
+        float: left;
+        width: 100%
+    }
+    
+    .banner_920 {
+        float: left;
+        width: 100%;
+        text-align: center;
+        margin-top: 19px;
+        margin-bottom: 10px
+    }
+    
+    .footer {
+        background: url(//soikeotv.net/wp-content/themes/soikeotv/assets/images/bg_footer.png) no-repeat;
+        background-size: cover;
+        float: left;
+        width: 100%
+    }
+    
+    .cols_logo img {
+        max-width: 100%;
+        width: 50%;
+        margin-top: 10px;
+        margin-bottom: 20px
+    }
+    
+    .cols_info h3,
+    .cols_info p,
+    .cols_logo p {
+        color: #fff
+    }
+    
+    .cols_info {
+        text-align: center
+    }
+    
+    .cols_info .heading_footer {
+        text-transform: uppercase;
+        font-size: 24px;
+        margin-top: 20px;
+        margin-bottom: 20px
+    }
+    
+    .list_category {
+        float: left;
+        width: 100%;
+        margin-top: 50px
+    }
+    
+    .items_category {
+        float: left;
+        width: 100%;
+        border-bottom: 1px dashed #bebebe;
+        padding-bottom: 20px;
+        margin-bottom: 20px
+    }
+    
+    .img_items_category img {
+        float: left;
+        border-radius: 5px;
+        overflow: hidden;
+        max-width: 100%;
+        width: 100%;
+        height: auto
+    }
+    
+    .info_items_category h2,
+    .info_items_category h2 a {
+        font-size: 25px;
+        color: #282828;
+        margin-top: 0;
+        margin-bottom: 15px
+    }
+    
+    .info_items_category p {
+        font-weight: 300;
+        font-size: 15px;
+        color: #282828
+    }
+    
+    .pagi_category {
+        float: left;
+        width: 100%;
+        text-align: center
+    }
+    
+    .breadcrumb {
+        float: left;
+        width: 100%;
+        background: 0 0;
+        margin-bottom: 0
+    }
+    
+    .breadcrumb ul {
+        float: left;
+        width: 100%;
+        margin-bottom: 0
+    }
+    
+    .breadcrumb ul li {
+        display: inline-block
+    }
+    
+    .breadcrumb ul li a {
+        padding-left: 10px;
+        color: #333;
+        font-style: italic
+    }
+    
+    .breadcrumb .breadcrumb_last {
+        color: #1d7200
+    }
+    
+    .list_news_relative {
+        float: left;
+        width: 100%;
+        margin-bottom: 20px
+    }
+    
+    .list_news_relative a {
+        font-size: 14px
+    }
+    
+    .detail_content {
+        float: left;
+        width: 100%
+    }
+    
+    .detai_header {
+        float: left;
+        width: 100%;
+        padding-left: 6px
+    }
+    
+    .detai_header h1 {
+        font-weight: 700;
+        font-size: 30px;
+        margin-top: 5px
+    }
+    
+    .author {
+        float: left;
+        width: 100%
+    }
+    
+    .short_content {
+        text-align: justify;
+        font-weight: 700;
+        font-size: 18px;
+        color: #282828;
+        margin-bottom: 20px
+    }
+    
+    .content_details {
+        text-align: justify;
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 1.4em
+    }
+    
+    .content_details img {
+        max-width: 100%;
+        height: auto
+    }
+    
+    .full ul {
+        list-style: disc;
+        padding-left: 30px
+    }
+    
+    .TYLETT {
+        background-color: #fff;
+        font-size: 11px;
+        font-family: Arial, Helvetica, sans-serif
+    }
+    
+    .Tyleweb_1 {
+        width: 10%;
+        text-align: center;
+        color: #fff;
+        background-color: #529f45;
+        line-height: 22px
+    }
+    
+    .Tyleweb_1a {
+        width: 30%;
+        text-align: center;
+        color: #fff;
+        background-color: #529f45
+    }
+    
+    .Tyleweb_1c {
+        text-align: center;
+        color: #fff;
+        background-color: #529f45;
+        line-height: 22px
+    }
+    
+    table {
+        border-collapse: inherit!important;
+        border-spacing: 1px!important
+    }
+    
+    .bg_h2 {
+        background-color: #d5dcc7;
+        line-height: 25px;
+        color: #c83233;
+        border-top: 1px solid#b4bba8;
+        font-size: 12px;
+        text-align: left;
+        padding-left: 10px;
+        margin: 0;
+        position: relative
+    }
+    
+    .TYLETT_3 {
+        background-color: #c6d4f1;
+        line-height: 18px
+    }
+    
+    .TYLETT_3a {
+        color: #464646;
+        text-align: center;
+        line-height: 15px
+    }
+    
+    .TYLETT_3b {
+        color: #464646;
+        text-align: left;
+        padding-left: 3px
+    }
+    
+    .chutyle {
+        color: #ee6363
+    }
+    
+    .main_content {
+        float: left;
+        width: 100%;
+        margin-top: -20px
+    }
+    
+    .wp-caption {
+        max-width: 100%;
+        margin: 0 auto
+    }
+    
+    .wp-caption-text {
+        float: left;
+        width: 100%;
+        text-align: center;
+        margin-top: 5px
+    }
+    
+    .img_cn img {
+        float: left
+    }
+    
+    .img_kk img {
+        float: right
+    }
+    
+    .TYLETT_4 {
+        background-color: #529f45;
+        line-height: 22px
+    }
+    
+    .TYLETT_4 strong {
+        color: #fff;
+        font-size: 12px;
+        padding-left: 20px
+    }
+    
+    .aligncenter {
+        text-align: center;
+        clear: both;
+        display: block;
+        margin: 6px auto
+    }
+    
+    .content_details p {
+        float: left;
+        width: 100%
+    }
+    
+    .home_content img {
+        max-width: 100%
+    }
+    
+    .math_items {
+        min-height: 200px
+    }
+    
+    .content_page h1 {
+        float: left;
+        width: 100%;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 20px
+    }
+    
+    .detail_content_page {
+        float: left;
+        width: 100%;
+        height: 500px;
+        overflow-y: scroll;
+        margin-top: 30px;
+        padding: 10px;
+        border: 1px solid #fd5200;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        -webkit-box-shadow: -2px 0 16px 0 #92e8b0;
+        -moz-box-shadow: -2px 0 16px 0 #92e8b0;
+        box-shadow: -2px 0 16px 0 #92e8b0
+    }
+    
+    .detail_content_page h2,
+    .detail_content_page h3,
+    .detail_content_page h4,
+    .detail_content_page h5,
+    .detail_content_page p,
+    .detail_content_page ul {
+        float: left;
+        width: 100%
+    }
+    
+    .bg_LS_web {
+        background-color: #d0d6c7;
+        line-height: 22px
+    }
+    
+    .bg_LS2_web {
+        background-color: #fff;
+        line-height: 24px
+    }
+    
+    .bg_LS3_web {
+        background-color: #f1f5f7;
+        line-height: 24px
+    }
+    
+    .bg_LS4_web {
+        background-color: #e2e6db;
+        line-height: 22px
+    }
+    
+    .LS_a_web {
+        width: 11%;
+        text-align: center;
+        color: #464646;
+        font-size: 11px;
+        font-weight: 700
+    }
+    
+    .LS_b_web {
+        width: 6%;
+        text-align: center;
+        color: #464646;
+        font-size: 11px;
+        font-weight: 700
+    }
+    
+    .LS_c_web {
+        width: 6%;
+        text-align: center;
+        color: #464646;
+        font-size: 11px;
+        font-weight: 700
+    }
+    
+    .LS_d_web {
+        width: 26%;
+        text-align: center;
+        color: #464646;
+        font-size: 11px;
+        font-weight: 700
+    }
+    
+    .LS_e_web {
+        width: 9%;
+        text-align: center;
+        color: #464646;
+        font-size: 11px;
+        font-weight: 700
+    }
+    
+    .LS_f_web {
+        width: 26%;
+        text-align: center;
+        color: #464646;
+        font-size: 11px;
+        font-weight: 700
+    }
+    
+    .LS_g_web {
+        width: 8%;
+        text-align: center;
+        color: #464646;
+        font-size: 11px;
+        font-weight: 700
+    }
+    
+    .LS_1_web {
+        text-align: center;
+        color: #fff;
+        font-size: 11px
+    }
+    
+    .LS_2_web {
+        text-align: center;
+        color: #464646;
+        font-size: 11px
+    }
+    
+    .LS_3_web {
+        text-align: center;
+        color: #464646;
+        font-size: 11px
+    }
+    
+    .LS_4_web {
+        text-align: right;
+        padding-right: 3px;
+        color: #464646;
+        font-size: 11px
+    }
+    
+    .LS_4a_web {
+        line-height: 20px;
+        text-align: right;
+        padding-right: 3px;
+        font-size: 14px;
+        color: #464646;
+        width: 50%
+    }
+    
+    .LS_4a_web span:first-child {
+        min-width: 70%
+    }
+    
+    .LS_4b_web {
+        line-height: 13px;
+        text-align: right;
+        padding-right: 3px;
+        font-size: 10px;
+        color: sienna
+    }
+    
+    .LS_5_web {
+        text-align: left;
+        padding-left: 3px;
+        color: #464646;
+        font-size: 11px;
+        background-color: #eee
+    }
+    
+    .LS_5a_web {
+        line-height: 20px;
+        text-align: center;
+        font-size: 13px;
+        color: #5a5a5a
+    }
+    
+    .LS_5b_web {
+        line-height: 13px;
+        text-align: center;
+        font-size: 10px;
+        color: sienna
+    }
+    
+    .LS_6_web {
+        text-align: left;
+        padding-left: 3px;
+        color: #464646;
+        font-size: 11px
+    }
+    
+    .LS_6a_web {
+        line-height: 20px;
+        text-align: left;
+        padding-left: 3px;
+        font-size: 14px;
+        color: #464646
+    }
+    
+    .LS_6a_web span:first-child {
+        min-width: 70%
+    }
+    
+    .LS_6b_web {
+        line-height: 13px;
+        text-align: left;
+        padding-left: 3px;
+        font-size: 10px;
+        color: sienna
+    }
+    
+    .LS_7_web {
+        text-align: center;
+        color: #464646;
+        font-size: 11px
+    }
+    
+    sup {
+        font-size: 9px;
+        color: #5cacee;
+        margin: 0 3px;
+        padding: 0 2px
+    }
+    
+    .mobiledisplay {
+        display: none
+    }
+    
+    .lst-cat-sk .sk-item a {
+        color: #000;
+        display: block;
+        padding: 5px;
+        border: 1px solid #0a4e96;
+        border-radius: 2px
+    }
+    
+    .tile_info strong {
+        width: 32%;
+        float: left;
+        text-align: center;
+        font-size: 12px;
+        margin-bottom: 10px;
+        font-weight: 700
+    }
+    
+    .mobile {
+        display: none
+    }
+    
+    @media(max-width:767px) {
+        body {
+            overflow-x: hidden
+        }
+        .top_menu ul {
+            float: none;
+            text-align: center
+        }
+        .top_menu ul li a {
+            font-size: 12px;
+            padding: 0
+        }
+        .logo img {
+            width: 50%;
+            float: left
+        }
+        .logo {
+            text-align: center
+        }
+        .navbar-header {
+            background: #1f3558;
+            float: right;
+            margin-top: 10px
+        }
+        .navbar-toggle {
+            float: left;
+            margin-right: 0!important
+        }
+        .main_menu .container-fluid,
+        .main_menu .navbar-header {
+            margin-left: 0;
+            margin-right: 0
+        }
+        .navbar-toggle .icon-bar {
+            display: block;
+            width: 28px;
+            height: 4px;
+            border-radius: 1px;
+            color: #fff;
+            background: #fff
+        }
+        .navbar {
+            border-bottom: 0;
+            margin-bottom: 0
+        }
+        .navbar-collapse.in {
+            overflow-x: hidden
+        }
+        .nav>li {
+            position: relative;
+            display: block;
+            float: left;
+            width: 96%
+        }
+        .nav>li.active>a,
+        .nav>li>a:focus,
+        .nav>li>a:hover {
+            background: 0 0;
+            border-bottom: none;
+            font-family: roboto condensed, sans-serif;
+            color: #1d7200
+        }
+        .nav>li>a {
+            font-family: roboto condensed, sans-serif;
+            color: #1f3558;
+            font-size: 21px;
+            padding: 10px 24px;
+            line-height: 28px;
+            border-bottom: 1px dashed #ccc
+        }
+        .navbar-toggle {
+            padding: 3px 10px
+        }
+        .match .top {
+            float: left;
+            width: 100%
+        }
+        .top .title_matchtop a {
+            font-size: 18px
+        }
+        .top .title_matchtop,
+        .top h3 {
+            font-size: 19px
+        }
+        .math_items {
+            padding: 0;
+            min-height: auto
+        }
+        .bot_content {
+            float: left
+        }
+        .desktopdisplay {
+            display: none
+        }
+        .mobiledisplay {
+            display: block
+        }
+        .img_cn img,
+        .img_kk img {
+            width: 70px;
+            height: 50px
+        }
+        .img_cn span,
+        .img_kk span {
+            padding: 0;
+            font-size: 12px;
+            height: auto
+        }
+        .tile_info {
+            float: left;
+            width: 100%
+        }
+        .tile_cau {
+            text-align: center;
+            padding: 0
+        }
+        .lst-cat-sk .sk-item a {
+            padding: 3px
+        }
+        .img_cn img,
+        .img_kk img {
+            float: none
+        }
+        .img_items_category {
+            padding-right: 0
+        }
+        .info_items_category {
+            padding-left: 0
+        }
+        .info_items_category h2 a {
+            font-size: 17px;
+            font-weight: 600;
+            margin-top: 5px;
+            margin-bottom: 5px
+        }
+        .info_items_category p {
+            text-align: justify
+        }
+        .title_r_new {
+            float: left;
+            width: 85%
+        }
+        .hot_news_right {
+            width: 96%
+        }
+        .giaihot,
+        .giaihot ul li {
+            width: 100%
+        }
+        .cols_info,
+        .cols_logo {
+            text-align: center;
+            border-bottom: 1px dashed #fff
+        }
+        .cols_logo img {
+            width: 50%
+        }
+        .content_details {
+            float: left;
+            width: 100%;
+            padding-left: 10px
+        }
+        .list_news_relative {
+            padding-left: 10px
+        }
+        .nhandinh .heading_cate {
+            margin-top: 5px
+        }
+        .giaihot1,
+        .giaihot1 ul li {
+            margin-bottom: 0!important
+        }
+        .breadcrumb {
+            margin-top: 20px
+        }
+        .detai_header h1 {
+            font-size: 23px
+        }
+        .fx_coming td {
+            font-size: 9px!important
+        }
+        .box_leader table tr td:first-child {
+            display: none
+        }
+        .info_right_news {
+            padding-left: 0;
+            margin-top: 10px
+        }
+        .list_category {
+            margin-top: 0
+        }
+        .cols_left {
+            padding-left: 15px!important
+        }
+        .math_items img {
+            height: auto
+        }
+        .top img {
+            height: auto
+        }
+        .navbar {
+            min-height: unset!important;
+            margin: 0!important
+        }
+        .orther_menu_mobile {
+            float: left;
+            width: 100%;
+            background: #000;
+            text-align: center;
+            margin-bottom: 5px
+        }
+        .orther_menu_mobile ul li {
+            display: inline-block;
+            padding: 10px 5px
+        }
+        .orther_menu_mobile ul li a {
+            display: block;
+            color: #fff;
+            font-size: 13px
+        }
+        .menu_mobile_2 ul {
+            margin-bottom: 0
+        }
+        .header.stuck {
+            position: fixed;
+            top: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+            margin-top: 0;
+            background: #fff;
+            z-index: 99999;
+            float: left;
+            width: 100%
+        }
+        .desktopdisplay {
+            display: none
+        }
+        .mobile {
+            display: block
+        }
+    }
+    
+    .giaihot1 ul {
+        float: left;
+        width: 100%
+    }
+    
+    .giaihot1,
+    .giaihot1 ul li {
+        float: left;
+        margin-bottom: 6px
+    }
+    
+    .giaihot1 ul li:hover {
+        background-color: #1e4c4e;
+        -webkit-transition: background-color 1s linear;
+        -ms-transition: background-color 1s linear;
+        transition: background-color 1s linear;
+        opacity: .8
+    }
+    
+    .giaihot1 ul li:hover a {
+        color: #fec128
+    }
+    
+    .giaihot1 ul li {
+        float: left;
+        margin-bottom: 6px;
+        height: 45px
+    }
+    
+    .giaihot1 ul li a {
+        color: #fff;
+        font-weight: 700;
+        position: relative
+    }
+    
+    .giaihot1 ul li a span {
+        position: absolute;
+        line-height: 45px;
+        vertical-align: middle;
+        padding-left: 10px;
+        font-size: 16px
+    }
+    
+    .giaihot1 ul li a img {
+        max-width: 100%;
+        width: 100%;
+        height: 100%
+    }
+    
+    .lst-cat-sk {
+        float: left;
+        margin-top: 10px;
+        width: 100%
+    }
+    
+    .list_news_relative .math_items {
+        min-height: 245px
+    }
+    
+    .list_news_relative hr {
+        float: left;
+        width: 100%;
+        border-top: 2px dashed #ccc
+    }
+    
+    #wpdevar_comment_1 {
+        float: left
+    }
+    
+    .content_details ol,
+    .content_details ul {
+        float: left;
+        width: 100%;
+        margin-left: 35px;
+        list-style: disc
+    }
+    
+    .content_details div {
+        float: left;
+        width: 100%
+    }
+    
+    .content_details h2,
+    .content_details h2 span,
+    .content_details h3,
+    .content_details h3 span,
+    .content_details h4,
+    .content_details h4 span,
+    .content_details h5,
+    .content_details h5 span {
+        float: left;
+        width: 100%
+    }
+    
+    .aligncenter {
+        float: none!important
+    }
+    
+    .rpbt_shortcode ul {
+        list-style: square;
+        background: #eaf8d2;
+        padding: 5px 30px;
+        margin-left: 0;
+        margin-bottom: 10px
+    }
+    
+    .rpbt_shortcode ul li a {
+        color: #000;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px
+    }
+    
+    .breadcrumb a {
+        color: #1d7200
+    }
+    
+    .breadcrumb .breadcrumb_last {
+        font-weight: 400!important
+    }
+    
+    #menu-menu-footer {
+        float: left;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px
+    }
+    
+    #menu-menu-footer li {
+        display: inline-block
+    }
+    
+    #menu-menu-footer li a {
+        color: #fff;
+        font-size: 13px;
+        padding: 10px;
+        cursor: pointer
+    }
+    
+    .banner_v9 {
+        float: left;
+        width: 100%;
+        text-align: center
+    }
+    
+    .heading_home {
+        display: none
+    }
+    
+    .nav>li>a>h2 {
+        font-size: 18px;
+        margin-top: 0;
+        margin-bottom: 0
+    }
+    
+    .list_post_bot ul li a span h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+        margin-top: 0;
+        float: left;
+        width: 95%
+    }
+    
+    .list_post_bot ul li a i {
+        float: left;
+        width: 5%
+    }
+    
+    .content_details ol,
+    .content_details ul {
+        list-style: disc
+    }
+    
+    .author_by {
+        text-align: right;
+        font-weight: 700;
+        color: #172940
+    }
+    
+    .author_by a {
+        color: #172940
+    }
+    
+    .autho_avar {
+        float: right;
+        margin: 5px 0;
+        text-align: right
+    }
+    
+    .container_author_avar {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 5px;
+        font-size: 12px;
+        margin-bottom: 20px;
+        float: left;
+        width: 100%
+    }
+    
+    .container_author_avar p {
+        font-size: 14px
+    }
+    
+    .info_author {
+        width: 66.66666667%!important
+    }
+    
+    .content_details .autho_avar {
+        width: 33.3333333%!important
+    }
+    
+    .page_author {
+        margin-top: 30px
+    }
+    
+    .misha_loadmore {
+        background-color: #ddd;
+        border-radius: 2px;
+        display: block;
+        text-align: center;
+        font-size: 14px;
+        font-size: .875rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        cursor: pointer;
+        text-transform: uppercase;
+        padding: 10px 0;
+        transition: background-color .2s ease-in-out, border-color .2s ease-in-out, color .3s ease-in-out;
+        float: left;
+        width: 100%;
+        margin-bottom: 20px
+    }
+    
+    .misha_loadmore:hover {
+        background-color: #767676;
+        color: #fff
+    }
+    
+    .sosial_icon {
+        float: left;
+        width: 100%;
+        padding: 14px 0 14px 12px
+    }
+    
+    .sosial_icon a {
+        color: #1e344e;
+        font-size: 13px;
+        padding-right: 15px
+    }
+    
+    .no-padding-left {
+        padding-left: 0!important
+    }
+    
+    .list_top_news {
+        float: left;
+        width: 100%
+    }
+    
+    .no_padding_right {
+        padding-right: 0!important
+    }
+    
+    .noPadding {
+        padding: 0!important
+    }
+    
+    .lef_top_news img {
+        max-width: 100%;
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden
+    }
+    
+    .right_top_news hr {
+        float: left;
+        width: 100%;
+        border-top: 1px solid #5d5b5b;
+        margin-top: 10px;
+        margin-bottom: 15px
+    }
+    
+    .title_left_news {
+        color: #000;
+        font-weight: 700;
+        width: 100%;
+        font-size: 15px;
+        float: left;
+        margin-top: 5px;
+        margin-bottom: 5px
+    }
+    
+    .lef_top_news p {
+        text-align: justify;
+        color: #000;
+        line-height: 1.4em;
+        font-size: 14px
+    }
+    
+    .img_right_news img {
+        max-width: 100%;
+        width: 100%;
+        border-radius: 5px;
+        overflow: hidden
+    }
+    
+    .info_right_news a {
+        color: #000
+    }
+    
+    .info_right_news a:hover {
+        text-decoration: none
+    }
+    
+    .xbottom,
+    .xtop,
+    .ybottom,
+    .ytop {
+        display: block;
+        background: 0 0;
+        font-size: 1px
+    }
+    
+    .xboxcontent {
+        display: block;
+        border: 0 solid #d7e3f5;
+        border-width: 0 1px
+    }
+    
+    .box_leader {
+        background: url(//soikeotv.net/wp-content/themes/soikeotv/assets/images/T_Coming.gif) no-repeat 5px 3px!important
+    }
+    
+    .box_leader table {
+        height: 30px;
+        background-image: url(//soikeotv.net/wp-content/themes/soikeotv/assets/images/lcoming_bg.gif)!important;
+        background-repeat: no-repeat;
+        background-position-x: right!important
+    }
+    
+    .lb_asian,
+    .lb_euro,
+    .lb_ou {
+        float: left;
+        position: relative;
+        font-size: 9pt;
+        font-weight: 700;
+        top: 5px;
+        left: -13px
+    }
+    
+    .coming {
+        padding: 5px
+    }
+    
+    tr.ls {
+        height: 18px;
+        background-color: #fee78b!important;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase
+    }
+    
+    .fixture_lis th {
+        background: #ffa906;
+        color: #fff;
+        border: solid 1px #fff
+    }
+    
+    .fixture_list th,
+    .fx_coming th,
+    .ranking_list th {
+        height: 22px;
+        background: #a3d3f5;
+        color: #fff;
+        text-align: center;
+        border-color: #fff;
+        border-style: solid;
+        border-width: 1px;
+        font-size: 11px
+    }
+    
+    #koboard .h,
+    .clgi_table1 tr,
+    .fixture_list tr,
+    .fixture_stats tr,
+    .group_standing_table tr,
+    .group_table tr,
+    .season_list tr,
+    tr {
+        height: 20px
+    }
+    
+    #_ComingMatches_ {
+        background: #fff
+    }
+    
+    tr.ls td {
+        text-align: left!important
+    }
+    
+    .cm_pick {
+        color: navy;
+        font-weight: 700
+    }
+    
+    .box_leader table tr {
+        float: right
+    }
+    
+    .box_leader tr td:nth-child(5),
+    .box_leader tr td:nth-child(6) {
+        display: none
+    }
+    
+    .heading_relative {
+        float: left;
+        background: #522426;
+        padding: 10px;
+        border-radius: 10px;
+        color: #fff;
+        width: 30%;
+        text-align: center
+    }
+    
+    .news_relative hr {
+        float: left;
+        width: 100%;
+        margin-top: 0;
+        margin-bottom: 0
+    }
+    
+    .fx_coming tr.alt td {
+        background-color: #e6eef0
+    }
+    
+    .fx_coming td {
+        font-size: 13px;
+        color: #000;
+        border-color: #d7e3f5;
+        border-style: none solid solid none;
+        border-width: 1px;
+        padding-left: 5px
+    }
+    
+    .fx_coming tr td img {
+        margin-top: -4px
+    }
+    
+    .content_soikeo_new table {
+        border-spacing: 0;
+        border-collapse: collapse
+    }
+    
+    .fx_coming th:last-child {
+        display: none
+    }
+    
+    .handicap_changed {
+        color: #546c24
+    }
+    
+    .cm_pick {
+        color: navy;
+        font-weight: 700
+    }
+    
+    .box_leader table tr {
+        float: right
+    }
+    
+    .odd_down {
+        color: #00f
+    }
+    
+    .odd_up {
+        color: red
+    }
+    
+    .content_soikeo_new {
+        margin-bottom: 20px;
+        padding-right: 0;
+        margin-top: 20px
+    }
+    
+    .sosial {
+        float: left;
+        width: 100%
+    }
+    
+    .sosial a {
+        float: left;
+        width: 50%;
+        text-align: left;
+        color: #fff;
+        text-align: center;
+        padding: 6px;
+        margin-bottom: 5px;
+        margin-left: 25%;
+        font-size: 13px
+    }
+    
+    .sosial a.facebook {
+        background: #3b5ca0;
+        margin-top: 20px
+    }
+    
+    .sosial a.twitter {
+        background: #1da1f2;
+        margin-bottom: 20px
+    }
+    
+    .cols_left {
+        padding-left: 0
+    }
+    
+    .math_items:nth-child(1) {
+        padding-left: 0
+    }
+    
+    .banner_mobile_header {
+        float: left;
+        width: 100%;
+        margin-top: 10px
+    }
+    
+    .banner_mobile_header a {
+        float: left;
+        width: 100%;
+        margin-top: 10px
+    }
+    
+    .banner_mobile_header a img {
+        max-width: 100%;
+        height: auto
+    }
+    
+    .adsballon {
+        bottom: 0;
+        z-index: 99999;
+        left: 0;
+        width: 100%;
+        max-height: 240px
+    }
+    
+    .close-ads {
+        display: block;
+        width: 30px;
+        right: 0
+    }
+    
+    .position-fixed {
+        position: fixed!important
+    }
+    
+    .adsballon a {
+        float: left;
+        width: 100%;
+        margin-bottom: 5px
+    }
+    
+    .adsballon .close-ads {
+        display: block;
+        top: -14%;
+        width: 40px;
+        height: 24px;
+        line-height: 1.1;
+        background: rgba(71, 71, 71, .86);
+        color: #f2f2f2;
+        font-weight: 600
+    }
+    
+    .close-ads {
+        position: absolute;
+        right: -8px;
+        background: #efefef;
+        width: 28px;
+        height: 28px;
+        text-align: center;
+        top: -11px;
+        font-size: 17px;
+        cursor: pointer
+    }
+    
+    .top_match {
+        float: left;
+        width: 100%
+    }
+    
+    .owl-carousel .owl-stage-outer {
+        height: auto!important
+    }
+    
+    .items_keo {
+        float: left;
+        width: 100%;
+        margin-bottom: 10px;
+        margin-top: 10px
+    }
+    
+    .items_keo a img {
+        max-width: 100%;
+        width: 100%
+    }
+    
+    .items_keo a {
+        color: #000;
+        font-size: 15px;
+        font-weight: 500
+    }
+    
+    .banner_sidebar {
+        float: left;
+        width: 100%;
+        margin-top: 30px
+    }
+    
+    .d-sm-block {
+        display: block!important
+    }
+    
+    .banner_580 div {
+        margin-bottom: 10px
+    }
+    
+    .btn_sk,
+    .btn_book {
+        background: #4267b2;
+        color: #000;
+        margin-top: -30px;
+        padding: 7px
+    }
+    
+    .hotmenu {
+        background: url(//i0.wp.com/keoso.net/wp-content/themes/keoso.net/assets/images/live.gif) no-repeat;
+        background-position-x: center;
+        background-position-y: 2px;
+        background-size: 60px;
+        z-index: 100000
+    }
+    
+    .no_scroll {
+        overflow-y: unset;
+        height: auto
+    }
+    
+    #table_content {
+        margin-bottom: 20px;
+        float: left;
+        width: 100%
+    }
+    
+    #table_content p {
+        margin: 0
+    }
+    
+    #noidung_neo {
+        float: left;
+        width: 100%;
+        background: #01210f;
+        padding: 5px;
+        font-weight: 700;
+        line-height: 27px;
+        color: #fff
+    }
+    
+    #table_content ul {
+        background: #d3eef9;
+        float: left;
+        width: 100%;
+        padding-left: 18px;
+        list-style-type: decimal;
+        color: #000;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        margin-left: 0
+    }
+    
+    #table_content ul li {
+        list-style-type: decimal
+    }
+    
+    #table_content ul li a {
+        color: #000;
+        line-height: 25px
+    }
+    
+    .btn,
+    .btn-new {
+        color: #fff!important;
+        display: inline-block;
+        text-align: center
+    }
+    
+    .btn-slim {
+        line-height: 2em;
+        padding: 0 50px;
+        margin: 5px 10px;
+        border-radius: 30px
+    }
+    
+    .gra-green {
+        background: #00a077;
+        background: linear-gradient(to right, #5bd5a2, #00a077)
+    }
+    
+    .menu_tyle {
+        background-color: #ecf0e3;
+        text-align: left;
+        padding-left: 10px;
+        font-size: 14px;
+        color: #6f8811;
+        line-height: 28px
+    }
+    
+    .menu_tyle a {
+        color: #6f8811;
+        text-decoration: none
+    }
+    
+    .menu_tyle .selected {
+        color: red;
+        font-weight: 700
+    }
+    
+    .list_league {
+        float: left;
+        width: 100%
+    }
+    
+    .elementor-widget {
+        position: relative
+    }
+    
+    .elementor-widget-wrap>.elementor-element {
+        width: 100%
+    }
+    
+    .elementor-element .elementor-widget-container {
+        -webkit-transition: background .3s, border .3s, -webkit-border-radius .3s, -webkit-box-shadow .3s;
+        transition: background .3s, border .3s, -webkit-border-radius .3s, -webkit-box-shadow .3s;
+        -o-transition: background .3s, border .3s, border-radius .3s, box-shadow .3s;
+        transition: background .3s, border .3s, border-radius .3s, box-shadow .3s;
+        transition: background .3s, border .3s, border-radius .3s, box-shadow .3s, -webkit-border-radius .3s, -webkit-box-shadow .3s
+    }
+    
+    .home-featured-cat.mag-cat-style-2 {
+        display: inline-block;
+        width: 100%;
+        float: left
+    }
+    
+    .elementor-row .home-featured-cat.mag-cat-style-2,
+    .vc_row .home-featured-cat.mag-cat-style-2 {
+        width: 100%;
+        float: none;
+        margin-right: 0;
+        vertical-align: top
+    }
+    
+    .penci-homepage-title {
+        position: relative;
+        margin-bottom: 10px;
+        text-align: center;
+        clear: both;
+        background: 0 0;
+        margin-top: 5px
+    }
+    
+    .penci-border-arrow {
+        position: relative;
+        line-height: 1.3;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-top: 5px
+    }
+    
+    .penci-homepage-title.penci-magazine-title {
+        text-align: left
+    }
+    
+    .penci-homepage-title.pcalign-left {
+        text-align: left
+    }
+    
+    .penci-homepage-title.style-4 {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 0
+    }
+    
+    .penci-homepage-title.style-4,
+    .penci-sidebar-content.style-4 .penci-border-arrow {
+        overflow: hidden
+    }
+    
+    .penci-homepage-title h3 {
+        font-size: 14px;
+        color: #0c2d02;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        z-index: 1
+    }
+    
+    .penci-border-arrow .inner-arrow {
+        border: 1px solid #313131;
+        background: #fff;
+        position: relative;
+        display: block;
+        text-transform: uppercase;
+        padding: 8px 12px 7px;
+        z-index: 3;
+        font-size: 16px;
+        font-weight: 700;
+        text-decoration: none
+    }
+    
+    .penci-homepage-title h3 a {
+        font-size: 14px;
+        color: #0c2d02;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        z-index: 1
+    }
+    
+    .penci-homepage-title h3 a:hover {
+        text-decoration: none
+    }
+    
+    .penci-homepage-title.style-4 .inner-arrow,
+    .penci-sidebar-content.style-4 .penci-border-arrow .inner-arrow {
+        padding: 0 12px;
+        border: none;
+        display: inline-block;
+        background: 0 0!important
+    }
+    
+    .penci-homepage-title.style-4.pcalign-left .inner-arrow,
+    .penci-sidebar-content.style-4.pcalign-left .penci-border-arrow .inner-arrow {
+        padding-left: 0
+    }
+    
+    .elementor-6 .elementor-element.elementor-element-d92d9f6 .penci-border-arrow .inner-arrow {
+        font-size: 27px;
+        text-transform: none;
+        font-style: italic;
+        letter-spacing: 0
+    }
+    
+    .penci-sidebar-content.style-4 .penci-border-arrow .inner-arrow:before,
+    .penci-sidebar-content.style-4 .penci-border-arrow .inner-arrow:after,
+    .penci-homepage-title.style-4 .inner-arrow:before,
+    .penci-homepage-title.style-4 .inner-arrow:after {
+        position: absolute;
+        content: "";
+        width: 1200px;
+        height: 0;
+        top: 50%;
+        left: 100%;
+        border: none;
+        border-bottom: 1px solid;
+        z-index: 1;
+        opacity: .5
+    }
+    
+    .penci-homepage-title.style-4 .inner-arrow:before,
+    .penci-sidebar-content.style-4 .penci-border-arrow .inner-arrow:before {
+        left: auto;
+        right: 100%
+    }
+    
+    .home-featured-cat-content {
+        display: inline-block;
+        width: 100%;
+        vertical-align: top;
+        margin-bottom: 60px
+    }
+    
+    .elementor-widget-penci-featured-cat .home-featured-cat-content {
+        margin-bottom: 0!important
+    }
+    
+    .home-featured-cat-content .mag-post-box {
+        width: 100%;
+        overflow: hidden;
+        display: table;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #ececec
+    }
+    
+    .home-featured-cat-content .mag-post-box.first-post {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 0
+    }
+    
+    .home-featured-cat-content.style-2 .mag-post-box.first-post,
+    .home-featured-cat-content.style-10 .mag-post-box.first-post {
+        padding-bottom: 22px;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #dedede
+    }
+    
+    .home-featured-cat-content .mag-post-box .magcat-thumb {
+        float: left;
+        margin-right: 20px;
+        position: relative;
+        transition: opacity .3s;
+        -webkit-transition: opacity .3s;
+        -moz-transition: opacity .3s
+    }
+    
+    .home-featured-cat-content .mag-post-box.first-post .magcat-thumb {
+        margin: 0 0 24px;
+        float: none
+    }
+    
+    .penci-image-holder {
+        position: relative;
+        width: 100%;
+        background: #f5f5f5 url(//soikeotv.net/wp-content/themes/soikeotv/assets/images/no-image.jpg);
+        display: inline-block;
+        vertical-align: top;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        overflow: hidden
+    }
+    
+    .penci-image-holder img {
+        max-width: 100%;
+        width: 100%
+    }
+    
+    .home-featured-cat-content .first-post .magcat-detail .mag-header {
+        position: relative
+    }
+    
+    .home-featured-cat-content .magcat-detail h3 a {
+        color: #313131;
+        display: block;
+        font-size: 14px;
+        transition: all .3s;
+        -webkit-transition: all .3s;
+        -moz-transition: all .3s;
+        font-family: roboto, sans-serif;
+        font-weight: 700;
+        letter-spacing: 0;
+        line-height: 1.4
+    }
+    
+    .elementor-6 .elementor-element.elementor-element-d92d9f6 .home-featured-cat-content .first-post .magcat-detail h3 a {
+        font-size: 20px
+    }
+    
+    .home-featured-cat-content .mag-post-box {
+        width: 100%;
+        overflow: hidden;
+        display: table;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #ececec
+    }
+    
+    .home-featured-cat-content .mag-post-box .magcat-thumb {
+        float: left;
+        margin-right: 20px;
+        position: relative;
+        transition: opacity .3s;
+        -webkit-transition: opacity .3s;
+        -moz-transition: opacity .3s
+    }
+    
+    .penci-image-holder.small-fix-size {
+        width: 120px
+    }
+    
+    .magcat-titlte {
+        margin: 0
+    }
+    
+    .neo_noidung {
+        background-color: #4267b2;
+        float: left;
+        width: 100%
+    }
+    
+    .neo_noidung h4 {
+        background: #000;
+        color: #fff;
+        padding: 15px;
+        margin-top: 0
+    }
+    
+    .neo_noidung ul {
+        float: left;
+        width: 100%;
+        margin-left: 0;
+        padding: 0 15px;
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 30px
+    }
+    
+    .neo_noidung ul li {
+        float: left;
+        width: 100%;
+        line-height: 30px;
+        list-style: decimal;
+        color: #fff
+    }
+    
+    .neo_noidung ul li a {
+        color: #fff
+    }
+    
+    .thumbsHolder_ThumbOFF {
+        height: 108px!important
+    }
+    
+    .single .youtubeVimeoWithPlaylist {
+        width: 427px!important
+    }
+    
+    .single .youtubeVimeoWithPlaylist iframe {
+        width: 427px!important
+    }
+    
+    .home .youtubeVimeoWithPlaylist,
+    .home .lbg_vimeo_player {
+        width: 826px!important
+    }
+    
+    .home .youtubeVimeoWithPlaylist iframe {
+        width: 826px!important
+    }
+    
+    .home .youtubeVimeoWithPlaylist.default .slider-vertical.ui-widget-content {
+        left: 1145px!important
+    }
+    
+    .home .youtubeVimeoWithPlaylistBorder {
+        overflow: unset!important
+    }
+</style>
+
+<body class="archive category category-tin-bong-da category-1">
+    <div id="fb-root" class=" fb_reset">
+        <div style="position: absolute; top: -10000px; width: 0px; height: 0px;">
+            <div></div>
+        </div>
+        <div class="fb-customerchat fb_invisible_flow fb_iframe_widget" attribution="setup_tool" page_id="240364649470335" theme_color="#155f43" logged_in_greeting="Đăng Ký tài khoản Cá Cược Bóng Đá tại https://v9b.com" logged_out_greeting="Đăng Ký tài khoản Cá Cược Bóng Đá tại https://v9b.com" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;attribution=setup_tool&amp;container_width=0&amp;current_url=https%3A%2F%2Fsoikeotv.net%2Ftin-bong-da&amp;locale=vi_VN&amp;logged_in_greeting=%C4%90%C4%83ng%20K%C3%BD%20t%C3%A0i%20kho%E1%BA%A3n%20C%C3%A1%20C%C6%B0%E1%BB%A3c%20B%C3%B3ng%20%C4%90%C3%A1%20t%E1%BA%A1i%20https%3A%2F%2Fv9b.com&amp;logged_out_greeting=%C4%90%C4%83ng%20K%C3%BD%20t%C3%A0i%20kho%E1%BA%A3n%20C%C3%A1%20C%C6%B0%E1%BB%A3c%20B%C3%B3ng%20%C4%90%C3%A1%20t%E1%BA%A1i%20https%3A%2F%2Fv9b.com&amp;page_id=240364649470335&amp;request_time=1632920896187&amp;sdk=joey&amp;theme_color=%23155f43"><span style="vertical-align: top; width: 0px; height: 0px; overflow: hidden;"><iframe name="f2196b5ef5ab9dc" width="1000px" height="1000px" data-testid="fb:customerchat Facebook Social Plugin" title="" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://web.facebook.com/v4.0/plugins/customerchat.php?app_id=&amp;attribution=setup_tool&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Df1f8c13cbf526c%26domain%3Dsoikeotv.net%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252Fsoikeotv.net%252Ff32715d66c7d6c%26relation%3Dparent.parent&amp;container_width=0&amp;current_url=https%3A%2F%2Fsoikeotv.net%2Ftin-bong-da&amp;locale=vi_VN&amp;logged_in_greeting=%C4%90%C4%83ng%20K%C3%BD%20t%C3%A0i%20kho%E1%BA%A3n%20C%C3%A1%20C%C6%B0%E1%BB%A3c%20B%C3%B3ng%20%C4%90%C3%A1%20t%E1%BA%A1i%20https%3A%2F%2Fv9b.com&amp;logged_out_greeting=%C4%90%C4%83ng%20K%C3%BD%20t%C3%A0i%20kho%E1%BA%A3n%20C%C3%A1%20C%C6%B0%E1%BB%A3c%20B%C3%B3ng%20%C4%90%C3%A1%20t%E1%BA%A1i%20https%3A%2F%2Fv9b.com&amp;page_id=240364649470335&amp;request_time=1632920896187&amp;sdk=joey&amp;theme_color=%23155f43" style="border: none; visibility: visible; width: 0px; height: 0px;"></iframe></span>
+        </div>
+    </div>
+    <div class="top_menu">
+        <div class="container">
+            <div class="row">
+                <ul>
+                    <li> <a href="/ve-chung-toi">Về chúng tôi <span>|</span> </a> </li>
+                    <li> <a href="/chinh-sach-bao-mat">Chính sách <span>|</span> </a> </li>
+                    <li> <a href="/dieu-khoan">Điều khoản <span>|</span> </a> </li>
+                    <li> <a href="/lien-he">Liên hệ </a> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="logo col-lg-3 col-xs-12 col-sm-12">
+                    <a href="/">
+                        <img src="https://soikeotv.net/wp-content/uploads/2019/08/logo-2.png" class="img-responsive lazy">
+                    </a>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                    </div>
+                </div>
+                <div class="orther_menu_mobile mobile">
+                    <div class="container">
+                        <div class="row">
+                            <div class="menu_mobile_2">
+                                <ul>
+                                    <li><a href="/keo-tran-hot">Kèo trận hot |</a>
+                                    </li>
+                                    <li><a href="/ty-le-keo/">Tỷ lệ kèo |</a>
+                                    </li>
+                                    <li><a href="/meo-choi-keo">Tip kèo |</a>
+                                    </li>
+                                    <li><a href="/v9bet">V9bet</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col-lg-9 banner_header desktopdisplay" style="text-align: right;float: right;">
+                    <a href="https://www.v9bet666.com/?affcode=950196" rel="nofollow" title="V9BET Cược Thể Thao" class="external"> <img src="http://v9banners.com/affiliates/vn/affiliate/viVbnG_728x90.gif" class="lazy img-responsive" alt="V9BET" style="display: unset;"> </a>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    <div class="main_menu">
+        <div class="container">
+            <div class="row">
+                <nav class="navbar">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul id="menu-main-menu" class="nav navbar-nav">
+                            <li id="menu-item-65" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-65"><a href="https://soikeotv.net/">Trang chủ</a>
+                            </li>
+                            <li id="menu-item-7" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7"><a href="https://soikeotv.net/keo-tran-hot"><h2>Kèo trận HOT</h2></a>
+                            </li>
+                            <li id="menu-item-24" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-24"><a href="https://soikeotv.net/ty-le-keo"><h2>Tỷ lệ kèo</h2></a>
+                            </li>
+                            <li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37"><a href="https://soikeotv.net/livescore"><h2>Livescore</h2></a>
+                            </li>
+                            <li id="menu-item-6" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6"><a href="https://soikeotv.net/meo-choi-keo"><h2>TIP kèo</h2></a>
+                            </li>
+                            <li id="menu-item-8" class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-8"><a href="https://soikeotv.net/tin-bong-da" aria-current="page"><h2>Tin nổi bật</h2></a>
+                            </li>
+                            <li id="menu-item-23311" class="hotmenu menu-item menu-item-type-taxonomy menu-item-object-category menu-item-23311"><a href="https://soikeotv.net/v9bet"><h2>V9BET</h2></a>
+                            </li>
+                            <li id="menu-item-22343" class="hotmenu menu-item menu-item-type-custom menu-item-object-custom menu-item-22343"><a href="https://www.v9bet666.com/vi-vn/affiliate?affcode=950196" class="external" rel="nofollow"><h2>Đặt cược</h2></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="main_content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 cols_left">
+                    <div class="top_match">
+                        <h3 class="heading_cate">Tin bóng đá</h3>
+                        <div class="match top">
+                            <a href="https://soikeotv.net/tin-bong-da/soi-keo-nhan-dinh-cadiz-vs-barcelona-03h00-ngay-24-9-2021.html"> <img width="672" height="420" src="https://soikeotv.net/wp-content/uploads/2021/09/soi-keo-cadiz-vs-barcelona-3h-ngay-24-9-2021-2-scaled-1.jpg?v=1632284831" class="attachment-700x420 size-700x420 wp-post-image" alt="" loading="lazy" srcset="https://soikeotv.net/wp-content/uploads/2021/09/soi-keo-cadiz-vs-barcelona-3h-ngay-24-9-2021-2-scaled-1.jpg?v=1632284831 800w, https://soikeotv.net/wp-content/uploads/2021/09/soi-keo-cadiz-vs-barcelona-3h-ngay-24-9-2021-2-scaled-1-530x331.jpg?v=1632284831 530w, https://soikeotv.net/wp-content/uploads/2021/09/soi-keo-cadiz-vs-barcelona-3h-ngay-24-9-2021-2-scaled-1-768x480.jpg?v=1632284831 768w, https://soikeotv.net/wp-content/uploads/2021/09/soi-keo-cadiz-vs-barcelona-3h-ngay-24-9-2021-2-scaled-1-220x138.jpg?v=1632284831 220w, https://soikeotv.net/wp-content/uploads/2021/09/soi-keo-cadiz-vs-barcelona-3h-ngay-24-9-2021-2-scaled-1-210x131.jpg?v=1632284831 210w, https://soikeotv.net/wp-content/uploads/2021/09/soi-keo-cadiz-vs-barcelona-3h-ngay-24-9-2021-2-scaled-1-318x199.jpg?v=1632284831 318w, https://soikeotv.net/wp-content/uploads/2021/09/soi-keo-cadiz-vs-barcelona-3h-ngay-24-9-2021-2-scaled-1-255x159.jpg?v=1632284831 255w, https://soikeotv.net/wp-content/uploads/2021/09/soi-keo-cadiz-vs-barcelona-3h-ngay-24-9-2021-2-scaled-1-300x188.jpg?v=1632284831 300w, https://soikeotv.net/wp-content/uploads/2021/09/soi-keo-cadiz-vs-barcelona-3h-ngay-24-9-2021-2-scaled-1-500x313.jpg?v=1632284831 500w" sizes="(max-width: 672px) 100vw, 672px"> </a>
+                            <h2><a href="https://soikeotv.net/tin-bong-da/soi-keo-nhan-dinh-cadiz-vs-barcelona-03h00-ngay-24-9-2021.html">Soi kèo, nhận định Cadiz vs Barcelona, 03h00 ngày 24/9/2021</a></h2>
+                            <p></p>
+                            <p>Cadiz được đá trên sân nhà nhưng đối thủ của họ lại là Barcelona, với phong độ bết bát hiện tại thì việc giữ lại 1 điểm là điều quá sức đối với thầy trò HLV Cervera Diaz Alvaro.</p>
+                            <p></p>
+                        </div>
+                        <div class="col-lg-4 math_items">
+                            <a href="https://soikeotv.net/tin-bong-da/gioi-thieu-web-xem-truc-tiep-bong-da-mitom-tv.html"> <img src="https://soikeotv.net/wp-content/uploads/2021/06/bong-da-truc-tuyen-mitom-live.jpeg?v=1622715122" width="220" height="122" class="attachment-220x138 size-220x138 wp-post-image" alt="bong-da-truc-tuyen-mitom-live" loading="lazy" srcset="https://soikeotv.net/wp-content/uploads/2021/06/bong-da-truc-tuyen-mitom-live.jpeg?v=1622715122 597w, https://soikeotv.net/wp-content/uploads/2021/06/bong-da-truc-tuyen-mitom-live-220x122.jpeg?v=1622715122 220w, https://soikeotv.net/wp-content/uploads/2021/06/bong-da-truc-tuyen-mitom-live-237x131.jpeg?v=1622715122 237w, https://soikeotv.net/wp-content/uploads/2021/06/bong-da-truc-tuyen-mitom-live-360x199.jpeg?v=1622715122 360w, https://soikeotv.net/wp-content/uploads/2021/06/bong-da-truc-tuyen-mitom-live-255x141.jpeg?v=1622715122 255w, https://soikeotv.net/wp-content/uploads/2021/06/bong-da-truc-tuyen-mitom-live-300x166.jpeg?v=1622715122 300w, https://soikeotv.net/wp-content/uploads/2021/06/bong-da-truc-tuyen-mitom-live-500x276.jpeg?v=1622715122 500w" sizes="(max-width: 220px) 100vw, 220px"> </a><a href="https://soikeotv.net/tin-bong-da/gioi-thieu-web-xem-truc-tiep-bong-da-mitom-tv.html">Giới thiệu web xem trực tiếp bóng đá Mitom TV</a> </div>
+                        <div class="col-lg-4 math_items">
+                            <a href="https://soikeotv.net/tin-bong-da/tim-hieu-kenh-xem-bong-truc-tuyen-duoc-ua-chuong-nhat-hien-nay-xoilac-net.html"> <img src="https://soikeotv.net/wp-content/uploads/2021/05/xoi-lac-tv-3.png?v=1622052906" width="220" height="125" class="attachment-220x138 size-220x138 wp-post-image" loading="lazy" srcset="https://soikeotv.net/wp-content/uploads/2021/05/xoi-lac-tv-3.png?v=1622052906 1144w, https://soikeotv.net/wp-content/uploads/2021/05/xoi-lac-tv-3-583x331.png?v=1622052906 583w, https://soikeotv.net/wp-content/uploads/2021/05/xoi-lac-tv-3-1024x582.png?v=1622052906 1024w, https://soikeotv.net/wp-content/uploads/2021/05/xoi-lac-tv-3-768x436.png?v=1622052906 768w, https://soikeotv.net/wp-content/uploads/2021/05/xoi-lac-tv-3-220x125.png?v=1622052906 220w, https://soikeotv.net/wp-content/uploads/2021/05/xoi-lac-tv-3-231x131.png?v=1622052906 231w, https://soikeotv.net/wp-content/uploads/2021/05/xoi-lac-tv-3-350x199.png?v=1622052906 350w, https://soikeotv.net/wp-content/uploads/2021/05/xoi-lac-tv-3-255x145.png?v=1622052906 255w, https://soikeotv.net/wp-content/uploads/2021/05/xoi-lac-tv-3-300x170.png?v=1622052906 300w, https://soikeotv.net/wp-content/uploads/2021/05/xoi-lac-tv-3-500x284.png?v=1622052906 500w" sizes="(max-width: 220px) 100vw, 220px"> </a><a href="https://soikeotv.net/tin-bong-da/tim-hieu-kenh-xem-bong-truc-tuyen-duoc-ua-chuong-nhat-hien-nay-xoilac-net.html">Tìm hiểu kênh xem bóng trực tuyến được ưa chuộng nhất hiện nay – Xoilac.net</a> </div>
+                        <div class="col-lg-4 math_items">
+                            <a href="https://soikeotv.net/tin-bong-da/tim-hieu-trang-soi-keo-bong-da-uy-tin-nhat-tai-viet-nam-keonhacai-ai.html"> <img src="https://soikeotv.net/wp-content/uploads/2021/05/keo-nha-cai-ai-3.png?v=1621018833" width="220" height="132" class="attachment-220x138 size-220x138 wp-post-image" loading="lazy" srcset="https://soikeotv.net/wp-content/uploads/2021/05/keo-nha-cai-ai-3.png?v=1621018833 1090w, https://soikeotv.net/wp-content/uploads/2021/05/keo-nha-cai-ai-3-551x331.png?v=1621018833 551w, https://soikeotv.net/wp-content/uploads/2021/05/keo-nha-cai-ai-3-1024x615.png?v=1621018833 1024w, https://soikeotv.net/wp-content/uploads/2021/05/keo-nha-cai-ai-3-768x462.png?v=1621018833 768w, https://soikeotv.net/wp-content/uploads/2021/05/keo-nha-cai-ai-3-220x132.png?v=1621018833 220w, https://soikeotv.net/wp-content/uploads/2021/05/keo-nha-cai-ai-3-218x131.png?v=1621018833 218w, https://soikeotv.net/wp-content/uploads/2021/05/keo-nha-cai-ai-3-331x199.png?v=1621018833 331w, https://soikeotv.net/wp-content/uploads/2021/05/keo-nha-cai-ai-3-255x153.png?v=1621018833 255w, https://soikeotv.net/wp-content/uploads/2021/05/keo-nha-cai-ai-3-300x180.png?v=1621018833 300w, https://soikeotv.net/wp-content/uploads/2021/05/keo-nha-cai-ai-3-500x300.png?v=1621018833 500w" sizes="(max-width: 220px) 100vw, 220px"> </a><a href="https://soikeotv.net/tin-bong-da/tim-hieu-trang-soi-keo-bong-da-uy-tin-nhat-tai-viet-nam-keonhacai-ai.html">Tìm hiểu trang soi kèo bóng đá uy tín nhất tại Việt Nam Keonhacai AI</a> </div>
+                        <div class="items_category">
+                            <div class="col-lg-5 col-xs-12 img_items_category no-padding-left">
+                                <a href="/"> <img src="https://soikeotv.net/wp-content/uploads/2021/05/thuc-khuya-live.png?v=1620580766" width="500" height="295" class="attachment-500x300 size-500x300 wp-post-image" loading="lazy" srcset="https://soikeotv.net/wp-content/uploads/2021/05/thuc-khuya-live.png?v=1620580766 1104w, https://soikeotv.net/wp-content/uploads/2021/05/thuc-khuya-live-561x331.png?v=1620580766 561w, https://soikeotv.net/wp-content/uploads/2021/05/thuc-khuya-live-1024x604.png?v=1620580766 1024w, https://soikeotv.net/wp-content/uploads/2021/05/thuc-khuya-live-768x453.png?v=1620580766 768w, https://soikeotv.net/wp-content/uploads/2021/05/thuc-khuya-live-220x130.png?v=1620580766 220w, https://soikeotv.net/wp-content/uploads/2021/05/thuc-khuya-live-222x131.png?v=1620580766 222w, https://soikeotv.net/wp-content/uploads/2021/05/thuc-khuya-live-337x199.png?v=1620580766 337w, https://soikeotv.net/wp-content/uploads/2021/05/thuc-khuya-live-255x150.png?v=1620580766 255w, https://soikeotv.net/wp-content/uploads/2021/05/thuc-khuya-live-300x177.png?v=1620580766 300w, https://soikeotv.net/wp-content/uploads/2021/05/thuc-khuya-live-500x295.png?v=1620580766 500w" sizes="(max-width: 500px) 100vw, 500px"> </a>
+                            </div>
+                            <div class="col-lg-7 col-xs-12 info_items_category no-padding-right">
+                                <h2><a href="https://soikeotv.net/tin-bong-da/tim-hieu-kenh-truc-tiep-bong-da-thuckhuya-live.html">Tìm hiểu kênh trực tiếp bóng đá ThucKhuya.LIVE</a></h2>
+                                <p></p>
+                                <p>Nếu các bạn còn đang gặp khó khăn trong việc tìm kiếm một trang web uy chuyên phát sóng trực tiếp bóng đá miễn phí có bình luận tiếng Việt thì cũng đừng lo lắng quá. Hãy đến với Thức Khuya của chúng tôi để được cung cấp những link xem bóng đá trực tiếp chất lượng và hòa chung một nhịp với ngon lửa đam mê bóng đá nhé.</p>
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="items_category">
+                            <div class="col-lg-5 col-xs-12 img_items_category no-padding-left">
+                                <a href="/"> <img src="https://soikeotv.net/wp-content/uploads/2021/03/gioi-thieu-ve-trang-soi-keo-nha-cai-nhan-dinh-bong-da-mien-phi-cam-bong-da.png?v=1617097603" width="403" height="300" class="attachment-500x300 size-500x300 wp-post-image" loading="lazy" srcset="https://soikeotv.net/wp-content/uploads/2021/03/gioi-thieu-ve-trang-soi-keo-nha-cai-nhan-dinh-bong-da-mien-phi-cam-bong-da.png?v=1617097603 1177w, https://soikeotv.net/wp-content/uploads/2021/03/gioi-thieu-ve-trang-soi-keo-nha-cai-nhan-dinh-bong-da-mien-phi-cam-bong-da-445x331.png?v=1617097603 445w, https://soikeotv.net/wp-content/uploads/2021/03/gioi-thieu-ve-trang-soi-keo-nha-cai-nhan-dinh-bong-da-mien-phi-cam-bong-da-1024x762.png?v=1617097603 1024w, https://soikeotv.net/wp-content/uploads/2021/03/gioi-thieu-ve-trang-soi-keo-nha-cai-nhan-dinh-bong-da-mien-phi-cam-bong-da-768x572.png?v=1617097603 768w, https://soikeotv.net/wp-content/uploads/2021/03/gioi-thieu-ve-trang-soi-keo-nha-cai-nhan-dinh-bong-da-mien-phi-cam-bong-da-185x138.png?v=1617097603 185w, https://soikeotv.net/wp-content/uploads/2021/03/gioi-thieu-ve-trang-soi-keo-nha-cai-nhan-dinh-bong-da-mien-phi-cam-bong-da-176x131.png?v=1617097603 176w, https://soikeotv.net/wp-content/uploads/2021/03/gioi-thieu-ve-trang-soi-keo-nha-cai-nhan-dinh-bong-da-mien-phi-cam-bong-da-267x199.png?v=1617097603 267w, https://soikeotv.net/wp-content/uploads/2021/03/gioi-thieu-ve-trang-soi-keo-nha-cai-nhan-dinh-bong-da-mien-phi-cam-bong-da-255x190.png?v=1617097603 255w, https://soikeotv.net/wp-content/uploads/2021/03/gioi-thieu-ve-trang-soi-keo-nha-cai-nhan-dinh-bong-da-mien-phi-cam-bong-da-269x200.png?v=1617097603 269w, https://soikeotv.net/wp-content/uploads/2021/03/gioi-thieu-ve-trang-soi-keo-nha-cai-nhan-dinh-bong-da-mien-phi-cam-bong-da-500x372.png?v=1617097603 500w" sizes="(max-width: 403px) 100vw, 403px"> </a>
+                            </div>
+                            <div class="col-lg-7 col-xs-12 info_items_category no-padding-right">
+                                <h2><a href="https://soikeotv.net/tin-bong-da/danh-gia-trang-soi-keo-nha-cai-truc-tuyen-uy-tin-cambongda-net.html">Đánh giá trang soi kèo nhà cái trực tuyến uy tín Cambongda.net</a></h2>
+                                <p></p>
+                                <p>Cảm bóng đá là địa chỉ soi kèo bóng đá, kèo nhà cái cùng các tips kèo chơi cá cược cực nhanh và chính xác. Đồnh hành cùng với trang web của chúng tôi, người chơi sẽ có cơ hội tiếp cận với các kèo ngon của các nhà cái để gia tăng cơ hội chiến thắng. </p>
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="items_category">
+                            <div class="col-lg-5 col-xs-12 img_items_category no-padding-left">
+                                <a href="/"> <img src="https://soikeotv.net/wp-content/uploads/2021/03/nha-cai-fun88vi-tv-link-vao-fun88vi-tv-moi-nhat-chat-luong-1.jpg?v=1616472684" width="483" height="300" data-wpfc-original-src="https://soikeotv.net/wp-content/uploads/2021/03/nha-cai-fun88vi-tv-link-vao-fun88vi-tv-moi-nhat-chat-luong-1.jpg?v=1616472684" class="attachment-500x300 size-500x300 wp-post-image" alt="blank" loading="lazy" data-wpfc-original-srcset="https://soikeotv.net/wp-content/uploads/2021/03/nha-cai-fun88vi-tv-link-vao-fun88vi-tv-moi-nhat-chat-luong-1.jpg?v=1616472684 800w, https://soikeotv.net/wp-content/uploads/2021/03/nha-cai-fun88vi-tv-link-vao-fun88vi-tv-moi-nhat-chat-luong-1-533x331.jpg?v=1616472684 533w, https://soikeotv.net/wp-content/uploads/2021/03/nha-cai-fun88vi-tv-link-vao-fun88vi-tv-moi-nhat-chat-luong-1-768x477.jpg?v=1616472684 768w, https://soikeotv.net/wp-content/uploads/2021/03/nha-cai-fun88vi-tv-link-vao-fun88vi-tv-moi-nhat-chat-luong-1-220x138.jpg?v=1616472684 220w, https://soikeotv.net/wp-content/uploads/2021/03/nha-cai-fun88vi-tv-link-vao-fun88vi-tv-moi-nhat-chat-luong-1-211x131.jpg?v=1616472684 211w, https://soikeotv.net/wp-content/uploads/2021/03/nha-cai-fun88vi-tv-link-vao-fun88vi-tv-moi-nhat-chat-luong-1-320x199.jpg?v=1616472684 320w, https://soikeotv.net/wp-content/uploads/2021/03/nha-cai-fun88vi-tv-link-vao-fun88vi-tv-moi-nhat-chat-luong-1-255x158.jpg?v=1616472684 255w, https://soikeotv.net/wp-content/uploads/2021/03/nha-cai-fun88vi-tv-link-vao-fun88vi-tv-moi-nhat-chat-luong-1-300x186.jpg?v=1616472684 300w, https://soikeotv.net/wp-content/uploads/2021/03/nha-cai-fun88vi-tv-link-vao-fun88vi-tv-moi-nhat-chat-luong-1-500x311.jpg?v=1616472684 500w" data-wpfc-original-sizes="(max-width: 483px) 100vw, 483px"> </a>
+                            </div>
+                            <div class="col-lg-7 col-xs-12 info_items_category no-padding-right">
+                                <h2><a href="https://soikeotv.net/tin-bong-da/nha-cai-fun88vi-tv-link-vao-fun88vi-tv-moi-nhat-chat-luong.html">Nhà cái Fun88vi.TV – Link vào Fun88vi.TV mới nhất, chất lượng</a></h2>
+                                <p></p>
+                                <p>Fun88vi.TV được đánh giá là nhà cái cá cược online an toàn, chất lượng bậc nhất hiện nay. Điều này được bảo chứng qua số lượng thành viên tham gia đông đảo. Nếu bạn còn đang nghi ngờ hay băn khoăn điều gì về nhà cái này thì có thể xem các nội dung đánh giá dưới đây. </p>
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="items_category">
+                            <div class="col-lg-5 col-xs-12 img_items_category no-padding-left">
+                                <a href="/"> <img src="https://soikeotv.net/wp-content/uploads/2020/10/hagl-hanoi.jpg?v=1603179822" width="500" height="263" data-wpfc-original-src="https://soikeotv.net/wp-content/uploads/2020/10/hagl-hanoi.jpg?v=1603179822" class="attachment-500x300 size-500x300 wp-post-image" alt="hagl-tru-hang" loading="lazy" data-wpfc-original-srcset="https://soikeotv.net/wp-content/uploads/2020/10/hagl-hanoi.jpg?v=1603179822 600w, https://soikeotv.net/wp-content/uploads/2020/10/hagl-hanoi-220x116.jpg?v=1603179822 220w, https://soikeotv.net/wp-content/uploads/2020/10/hagl-hanoi-250x131.jpg?v=1603179822 250w, https://soikeotv.net/wp-content/uploads/2020/10/hagl-hanoi-379x199.jpg?v=1603179822 379w, https://soikeotv.net/wp-content/uploads/2020/10/hagl-hanoi-255x134.jpg?v=1603179822 255w, https://soikeotv.net/wp-content/uploads/2020/10/hagl-hanoi-300x158.jpg?v=1603179822 300w, https://soikeotv.net/wp-content/uploads/2020/10/hagl-hanoi-500x263.jpg?v=1603179822 500w" data-wpfc-original-sizes="(max-width: 500px) 100vw, 500px"> </a>
+                            </div>
+                            <div class="col-lg-7 col-xs-12 info_items_category no-padding-right">
+                                <h2><a href="https://soikeotv.net/tin-bong-da/tai-sao-lua-xuan-truong-tuan-anh-mai-chi-tru-hang-v-league.html">Tại sao lứa Xuân Trường, Tuấn Anh mãi chỉ trụ hạng V.League?</a></h2>
+                                <p></p>
+                                <p>Trận thua 0-4 của HAGL trước Hà Nội đã khiến nhiều cổ động viên cảm thấy vô cùng thất vọng. Đã 5 năm kể từ ngày đá V.League, gà nhà bầu Đức cũng mãi chỉ chật vật đua trụ hạng.</p>
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="items_category">
+                            <div class="col-lg-5 col-xs-12 img_items_category no-padding-left">
+                                <a href="/"> <img src="https://soikeotv.net/wp-content/uploads/2020/10/lampard-1.jpg?v=1603178029" width="500" height="262" data-wpfc-original-src="https://soikeotv.net/wp-content/uploads/2020/10/lampard-1.jpg?v=1603178029" class="attachment-500x300 size-500x300 wp-post-image" alt="lampard-dep-trai" loading="lazy" data-wpfc-original-srcset="https://soikeotv.net/wp-content/uploads/2020/10/lampard-1.jpg?v=1603178029 700w, https://soikeotv.net/wp-content/uploads/2020/10/lampard-1-631x331.jpg?v=1603178029 631w, https://soikeotv.net/wp-content/uploads/2020/10/lampard-1-220x115.jpg?v=1603178029 220w, https://soikeotv.net/wp-content/uploads/2020/10/lampard-1-250x131.jpg?v=1603178029 250w, https://soikeotv.net/wp-content/uploads/2020/10/lampard-1-380x199.jpg?v=1603178029 380w, https://soikeotv.net/wp-content/uploads/2020/10/lampard-1-255x134.jpg?v=1603178029 255w, https://soikeotv.net/wp-content/uploads/2020/10/lampard-1-300x157.jpg?v=1603178029 300w, https://soikeotv.net/wp-content/uploads/2020/10/lampard-1-500x262.jpg?v=1603178029 500w" data-wpfc-original-sizes="(max-width: 500px) 100vw, 500px"> </a>
+                            </div>
+                            <div class="col-lg-7 col-xs-12 info_items_category no-padding-right">
+                                <h2><a href="https://soikeotv.net/tin-bong-da/hay-cong-bang-voi-hlv-lampard.html">Hãy công bằng với HLV Lampard</a></h2>
+                                <p></p>
+                                <p>Sau trận hòa đầy tiếc nuối trước Southampton với tỷ số 3-3, nhiều fan Chelsea đã chỉ trích HLV Lampard khá thậm tệ. Dẫu vậy, chúng ta cần công bằng hơn với nhà cầm quân trẻ tuổi này.&nbsp;</p>
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="items_category">
+                            <div class="col-lg-5 col-xs-12 img_items_category no-padding-left">
+                                <a href="/"> <img src="https://soikeotv.net/wp-content/uploads/2020/10/Wenger-Mourinho.jpg?v=1603098823" width="386" height="300" data-wpfc-original-src="https://soikeotv.net/wp-content/uploads/2020/10/Wenger-Mourinho.jpg?v=1603098823" class="attachment-500x300 size-500x300 wp-post-image" alt="Wenger-Mourinho-dep-trai" loading="lazy" data-wpfc-original-srcset="https://soikeotv.net/wp-content/uploads/2020/10/Wenger-Mourinho.jpg?v=1603098823 960w, https://soikeotv.net/wp-content/uploads/2020/10/Wenger-Mourinho-425x331.jpg?v=1603098823 425w, https://soikeotv.net/wp-content/uploads/2020/10/Wenger-Mourinho-768x598.jpg?v=1603098823 768w, https://soikeotv.net/wp-content/uploads/2020/10/Wenger-Mourinho-177x138.jpg?v=1603098823 177w, https://soikeotv.net/wp-content/uploads/2020/10/Wenger-Mourinho-168x131.jpg?v=1603098823 168w, https://soikeotv.net/wp-content/uploads/2020/10/Wenger-Mourinho-256x199.jpg?v=1603098823 256w, https://soikeotv.net/wp-content/uploads/2020/10/Wenger-Mourinho-255x198.jpg?v=1603098823 255w, https://soikeotv.net/wp-content/uploads/2020/10/Wenger-Mourinho-257x200.jpg?v=1603098823 257w, https://soikeotv.net/wp-content/uploads/2020/10/Wenger-Mourinho-500x389.jpg?v=1603098823 500w" data-wpfc-original-sizes="(max-width: 386px) 100vw, 386px"> </a>
+                            </div>
+                            <div class="col-lg-7 col-xs-12 info_items_category no-padding-right">
+                                <h2><a href="https://soikeotv.net/tin-bong-da/bi-cham-choc-wenger-che-mourinho-tre-trau.html">Bị châm chọc, Wenger chê Mourinho ‘trẻ trâu’</a></h2>
+                                <p></p>
+                                <p>Cựu HLV Arsenal lên tiếng sau phát ngôn châm chích từ “Người đặc biệt” Mourinho.</p>
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="wp-pagenavi" role="navigation"> <span class="pages">Trang 1 trên 121</span><span aria-current="page" class="current">1</span><a class="page larger" title="Page 2" href="https://soikeotv.net/tin-bong-da/page/2">2</a><a class="page larger" title="Page 3" href="https://soikeotv.net/tin-bong-da/page/3">3</a><a class="page larger" title="Page 4" href="https://soikeotv.net/tin-bong-da/page/4">4</a><a class="page larger" title="Page 5" href="https://soikeotv.net/tin-bong-da/page/5">5</a><span class="extend">...</span><a class="larger page" title="Page 10" href="https://soikeotv.net/tin-bong-da/page/10">10</a><a class="larger page" title="Page 20" href="https://soikeotv.net/tin-bong-da/page/20">20</a><a class="larger page" title="Page 30" href="https://soikeotv.net/tin-bong-da/page/30">30</a><span class="extend">...</span><a class="nextpostslink" rel="next" aria-label="Next Page" href="https://soikeotv.net/tin-bong-da/page/2">»</a><a class="last" aria-label="Last Page" href="https://soikeotv.net/tin-bong-da/page/121">Trang cuối »</a>
+                        </div>
+                    </div>
+                    <div class="category_des">
+                        <p style="text-align: justify;"><strong>Chuyên mục <span style="color: #0000ff;">TIN BÓNG ĐÁ</span> tại trang thông tin <span style="color: #0000ff;">Soi kèo TV</span> thường xuyên cập nhật những tin tức bóng đá mới nhất theo ngày, theo từng mùa giải bóng đá lớn trên Thế giới.</strong>
+                        </p>
+                        <p style="text-align: justify;">Cập nhật những tin bóng đá đối với từng đội bóng, từng mùa giải,… cũng là một trong những yếu tố giúp mọi người có thể cân nhắc để lựa chọn đưa ra được <strong><a href="https://soikeotv.net/ty-le-keo">tỷ lệ kèo bóng đá</a></strong> chính xác. Nhằm giúp mọi người cập nhật nhanh, chính xác được những bản tin thể thao mới nhất theo từng giải đấu cụ thể:</p>
+                        <p style="text-align: justify; padding-left: 40px;"><span style="color: #339966;"><strong>✓</strong></span> Giải Ngoại Hạng Anh;</p>
+                        <p style="text-align: justify; padding-left: 40px;"><span style="color: #339966;"><strong>✓</strong></span> Giải đấu bóng đá Cúp C1;</p>
+                        <p style="text-align: justify; padding-left: 40px;"><strong><span style="color: #339966;">✓</span></strong> Giải thi đấu bóng đá Tây Ban Nha;</p>
+                        <p style="text-align: justify; padding-left: 40px;"><span style="color: #339966;"><strong>✓</strong> </span>Bóng đá Đức;</p>
+                        <p style="text-align: justify; padding-left: 40px;"><span style="color: #339966;"><strong>✓</strong></span> Bóng đá Ý;</p>
+                        <p style="text-align: justify;">Ngoài ra, tại chuyên mục này các chuyên gia còn cập nhật thông tin về tương quan sức mạnh của từng đội tuyển, các vị Huấn luyện viên trong từng đội tuyển, phong độ thi đấu hiện tại,… Đây sẽ là những thông tin hữu ích giúp cho người chơi trong quá trình <strong><a href="https://soikeotv.net/">soi kèo bóng đá</a></strong> đặt cược cá độ bóng đá tại nhà cái. Những thông tin đời sống cá nhân, chuyện tình cảm,… của những cầu thủ xuất sắc, được nhiều người hâm mộ yêu thích cũng được chia sẻ trên chuyên mục này.</p>
+                        <p style="text-align: justify;">Đồng hành cùng trang thông tin điện tử <span style="color: #0000ff;"><strong>soikeotv.net</strong></span> sẽ giúp mọi người cập nhật những tin bóng đá mới nhất, mức độ chính xác cao. Đây là những điều không phải trang thông tin bóng đá, soi kèo nhà cái nào cũng làm được. Hy vọng chúng tôi sẽ không làm các bạn thất vọng.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xs-12 no-padding-right">
+                    <!--<div class="banner_sidebar">
+                        <a rel="nofollow" href="https://www.v9bet666.com/?affcode=950196" alt="V9BET Tỷ Lệ Kèo Bóng Đá Hôm Nay" class="external"> <img src="http://v9banners.com/affiliates/vn/media/soikeoTv_375x80.gif" alt="V9BET"> </a>
+                    </div>-->
+                    <h3 class="heading_cate">Mẹo Chơi Kèo</h3>
+                    <div class="hot_news_right">
+                        <div class="content_news_right">
+                            <ul class="fa-ul">
+                                <li>
+                                    <a href="https://soikeotv.net/meo-choi-keo/tham-khao-cam-nang-ca-truc-tuyen-chat-luong-tai-fun88one-net.html">
+                                        <div class="col-lg-2 info_r_news no-padding-left no-padding-right">
+                                            <span class="fa-li"><i class="fas fa-caret-right"></i></span> <span class="time">22:23</span>
+                                        </div>
+                                        <div class="col-lg-10 title_r_new">
+                                            <span>Tham khảo cẩm nang cá độ trực tuyến chất lượng tại Fun88one.net</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://soikeotv.net/meo-choi-keo/co-nen-dat-cuoc-ca-do-bong-da-mien-phi-hay-khong.html">
+                                        <div class="col-lg-2 info_r_news no-padding-left no-padding-right">
+                                            <span class="fa-li"><i class="fas fa-caret-right"></i></span> <span class="time">13:55</span>
+                                        </div>
+                                        <div class="col-lg-10 title_r_new">
+                                            <span>Đặt cược miễn phí và lời khuyên có nên đặt cược bóng đá miễn phí hay không</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://soikeotv.net/meo-choi-keo/giai-thich-keo-1-4.html">
+                                        <div class="col-lg-2 info_r_news no-padding-left no-padding-right">
+                                            <span class="fa-li"><i class="fas fa-caret-right"></i></span> <span class="time">13:47</span>
+                                        </div>
+                                        <div class="col-lg-10 title_r_new"> <span>Giải thích kèo ¼ là gì, làm sao để thắng kèo dễ nhất</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://soikeotv.net/meo-choi-keo/cach-soi-keo-tips-bong-da-c1.html">
+                                        <div class="col-lg-2 info_r_news no-padding-left no-padding-right">
+                                            <span class="fa-li"><i class="fas fa-caret-right"></i></span> <span class="time">16:00</span>
+                                        </div>
+                                        <div class="col-lg-10 title_r_new"> <span>Tiết lộ cách soi kèo tips bóng đá C1 ăn chắc</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://soikeotv.net/meo-choi-keo/ca-do-giao-bong-la-gi.html">
+                                        <div class="col-lg-2 info_r_news no-padding-left no-padding-right">
+                                            <span class="fa-li"><i class="fas fa-caret-right"></i></span> <span class="time">15:32</span>
+                                        </div>
+                                        <div class="col-lg-10 title_r_new">
+                                            <span>Cá độ giao bóng là gì và những lưu ý khi chơi cá độ giao bóng</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://soikeotv.net/meo-choi-keo/nhung-loai-keo-nao-nen-cuoc.html">
+                                        <div class="col-lg-2 info_r_news no-padding-left no-padding-right">
+                                            <span class="fa-li"><i class="fas fa-caret-right"></i></span> <span class="time">15:22</span>
+                                        </div>
+                                        <div class="col-lg-10 title_r_new">
+                                            <span>Những loại kèo nào nên cược khi tham gia cá độ vá cách thức chọn kèo</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://soikeotv.net/meo-choi-keo/keo-rung-la-gi.html">
+                                        <div class="col-lg-2 info_r_news no-padding-left no-padding-right">
+                                            <span class="fa-li"><i class="fas fa-caret-right"></i></span> <span class="time">16:30</span>
+                                        </div>
+                                        <div class="col-lg-10 title_r_new"> <span>Kèo rung là gì? Cách chơi kèo rung thắng chắc</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://soikeotv.net/meo-choi-keo/danh-nguoi-la-gi.html">
+                                        <div class="col-lg-2 info_r_news no-padding-left no-padding-right">
+                                            <span class="fa-li"><i class="fas fa-caret-right"></i></span> <span class="time">13:09</span>
+                                        </div>
+                                        <div class="col-lg-10 title_r_new">
+                                            <span>Đánh nguội trong bóng đá và tất cả những điều cần biết</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://soikeotv.net/meo-choi-keo/nha-cai-thay-doi-ty-le-keo-bong-da.html">
+                                        <div class="col-lg-2 info_r_news no-padding-left no-padding-right">
+                                            <span class="fa-li"><i class="fas fa-caret-right"></i></span> <span class="time">12:45</span>
+                                        </div>
+                                        <div class="col-lg-10 title_r_new">
+                                            <span>Tổng hợp những dấu hiệu nhà cái thay đổi tỷ lệ kèo bóng đá</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://soikeotv.net/meo-choi-keo/khuyen-mai-ca-do-bong-da.html">
+                                        <div class="col-lg-2 info_r_news no-padding-left no-padding-right">
+                                            <span class="fa-li"><i class="fas fa-caret-right"></i></span> <span class="time">11:28</span>
+                                        </div>
+                                        <div class="col-lg-10 title_r_new">
+                                            <span>Tìm hiểu về chương trình khuyến mãi cá cược bóng đá</span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h3 class="heading_cate">GIẢI SOI KÈO HOT</h3>
+                    <div class="giaihot">
+                        <ul>
+                            <li>
+                                <a href="https://soikeotv.net/premier-league"> <span>Premier League</span> <img src="https://soikeotv.net/wp-content/themes/soikeotv/assets/images/EPL.png"> </a>
+                            </li>
+                            <li>
+                                <a href="https://soikeotv.net/laliga"> <span>Laliga</span> <img src="https://soikeotv.net/wp-content/themes/soikeotv/assets/images/Laliga.png"> </a>
+                            </li>
+                            <li>
+                                <a href="https://soikeotv.net/seria-a"> <span>Serie A</span> <img src="https://soikeotv.net/wp-content/themes/soikeotv/assets/images/Serie-A.png"> </a>
+                            </li>
+                            <li>
+                                <a href="https://soikeotv.net/bundesliga"> <span>Bundesliga</span> <img src="https://soikeotv.net/wp-content/themes/soikeotv/assets/images/bun.png"> </a>
+                            </li>
+                            <li>
+                                <a href="https://soikeotv.net/ligue-1"> <span>Ligue 1</span> <img src="https://soikeotv.net/wp-content/themes/soikeotv/assets/images/Ligue-1.png"> </a>
+                            </li>
+                            <li>
+                                <a href="https://soikeotv.net/champions-leaguge"> <span>Champions League</span> <img src="https://soikeotv.net/wp-content/themes/soikeotv/assets/images/UEFA-CL.png"> </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--<div class="banner_siderbar">
+                        <a href="https://www.v9bet666.com/vi-vn/affiliate?affcode=950196" alt="V9BET Kiếm Tiền Online" class="external" rel="nofollow"><img src="http://v9banners.com/affiliates/vn/media/Soikeo10_375x250.gif" alt="V9BET Đại Lý">
+                        </a>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <ul id="menu-menu-footer" class="menu">
+                    <li id="menu-item-1756" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1756"><a href="https://soikeotv.net/">Trang chủ</a>
+                    </li>
+                    <li id="menu-item-1979" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1979"><a href="https://soikeotv.net/ty-le-keo">Tỷ lệ Kèo</a>
+                    </li>
+                    <li id="menu-item-1980" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1980"><a href="https://soikeotv.net/livescore">Livescore</a>
+                    </li>
+                    <li id="menu-item-1757" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-1757"><a href="https://soikeotv.net/chinh-sach-bao-mat">Chính sách bảo mật</a>
+                    </li>
+                    <li id="menu-item-1758" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1758"><a href="https://soikeotv.net/dieu-khoan">Điều khoản</a>
+                    </li>
+                    <li id="menu-item-1759" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1759"><a href="https://soikeotv.net/lien-he">Liên hệ</a>
+                    </li>
+                </ul>
+                <div class="col-lg-4 cols_logo">
+                    <a href="/"><img alt="blank" src="https://soikeotv.net/wp-content/themes/soikeotv/assets/images/logo.png" class="lazy" data-wpfc-original-src="https://soikeotv.net/wp-content/themes/soikeotv/assets/images/logo.png">
+                    </a>
+                    <p>SoikeoTV mang đến cho người chơi những thông tin nhanh &amp; chính xác nhất </p>
+                </div>
+                <div class="col-lg-4 cols_info">
+                    <p class="heading_footer">Hợp tác truyền thông</p>
+                    <p>abc@gmail.com</p>
+                    <p><b>Copyright © 2021 by amur</b>
+                    </p>
+                </div>
+                <div class="col-lg-4 cols_col-dmca" style="text-align: center;">
+                    <a href="//www.dmca.com/Protection/Status.aspx?ID=ce1978ef-37a2-40a2-929f-b7cdd2502759" title="DMCA.com Protection Status" class="dmca-badge external" rel="nofollow">
+                        <img src="https://images.dmca.com/Badges/_dmca_premi_badge_2.png?ID=ce1978ef-37a2-40a2-929f-b7cdd2502759" data-wpfc-original-src="https://images.dmca.com/Badges/_dmca_premi_badge_2.png?ID=ce1978ef-37a2-40a2-929f-b7cdd2502759" alt="DMCA.com Protection Status" class="lazy">
+                    </a>
+                    <div class="sosial"> <a class="facebook external" href="https://www.facebook.com/soikeotv/" target="_blank" rel="nofollow">LIKE ON FACEBOOK</a>
+                        <br>
+                    </div>
+                    <div class="sosial"> <a class="twitter external" href="https://twitter.com/soikeotvcom" target="_blank" rel="nofollow">FOLLOW ON TWITTER</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--<div class="desktopdisplay" style="position: fixed;top:50px;left:20px;">
+        <div class="wp_bannerize_container wp_bannerize_layout_vertical">
+            <div class="wp_bannerize_banner_box wp_bannerize_category_float_left_top" data-title="Floating left 1" data-mime_type="image-gif" data-banner_id="17032" id="wpbanner-17032">
+                <a rel="nofollow" href="https://www.v9bet666.com/?affcode=950196" alt="V9BET Cược Thể Thao" class="external"> <img src="http://v9banners.com/affiliates/vn/affiliate/viVbnG_120x600.gif" class="lazy" alt="V9BET Tỷ Lệ Cược Bóng Đá Hôm Nay"> </a>
+            </div>
+        </div>
+    </div>
+    <div class="desktopdisplay" style="position: fixed;top:50px;right:20px;">
+        <div class="wp_bannerize_container wp_bannerize_layout_vertical">
+            <div class="wp_bannerize_banner_box wp_bannerize_category_float_left_top" data-title="Floating left 1" data-mime_type="image-gif" data-banner_id="17032" id="wpbanner-17032">
+                <a rel="nofollow" href="https://www.v9bet666.com/?affcode=950196" alt="V9BET Cược Thể Thao" class="external"> <img src="http://v9banners.com/affiliates/vn/affiliate/viVbnG_120x600.gif" class="lazy" alt="V9BET Tỷ Lệ Cược Bóng Đá Hôm Nay">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="position-fixed adsballon mobile">
+        <div class="show-ads-banner"><span id="close_ads" class="close-ads">x</span>
+            <a target="_blank" rel="nofollow" href="https://www.v9bet666.com/?affcode=950196" alt="Đại Lý V9BET Hoa Hồng Khủng" class="external"> <img src="http://v9banners.com/affiliates/vn/media/Soikeo1_450x45.jpg" class="lazy" alt="V9BET"> </a>
+        </div>
+    </div>-->
+    <!--<div class="desktopdisplay" style="position: fixed;bottom:0px;left:0px;">
+        <div class="wp_bannerize_container wp_bannerize_layout_vertical">
+            <div class="wp_bannerize_banner_box wp_bannerize_category_desktop-balloon-left" data-title="Desktop Balloon Left" data-mime_type="image-gif" data-banner_id="17855" id="wpbanner-17855">
+                <a href="https://www.v9bet666.com/?affcode=950196" alt="V9BET Tỷ Lệ Kèo Bóng Đá Hôm Nay" class="external" rel="nofollow"> <img src="http://v9banners.com/affiliates/vn/media/soikeoTv_200x80.gif" class="lazy" alt="V9BET"> </a>
+            </div>
+        </div>
+    </div>-->
+
+</body>
+
+</html>
